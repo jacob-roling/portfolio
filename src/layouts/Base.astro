@@ -14,9 +14,53 @@ import "../style/global.css";
       title="Jacob Roling"
       href={`${Astro.site}rss.xml`}
     />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <slot name="head" />
   </head>
-  <body>
+  <body hx-boost="true">
+    <header
+      class="print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-4 border-b border-b-neutral-border"
+    >
+      <nav aria-label="Primary Navigation">
+        <ul class="flex gap-4" role="list">
+          <li class="sr-only focus-within:not-sr-only">
+            <a class="button" href="#main">Skip to content</a>
+          </li>
+          <li>
+            <a class="button" href="/">Home</a>
+          </li>
+          <li>
+            <a class="button" href="/blog">Blog</a>
+          </li>
+          <li>
+            <a class="button" href="/#projects">Projects</a>
+          </li>
+          <li class="ml-auto">
+            <label for="theme-switcher">Theme</label>
+            <select name="theme-switcher" id="theme-switcher">
+              <option value="auto">Auto</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </li>
+          <li>
+            <button class="button" onclick="print()">Print</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
     <slot />
+    <footer class="container">
+      <nav aria-label="Secondary Navigation">
+        <ul>
+          <li>
+            <a href="/sitemap-index.xml">Sitemap</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+    <script>
+      import "htmx.org";
+    </script>
   </body>
 </html>

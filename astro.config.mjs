@@ -2,8 +2,11 @@ import { defineConfig } from 'astro/config';
 // import tailwindcss from '@tailwindcss/vite';
 import icon from "astro-icon";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
+  output: 'hybrid',
   site: "https://jacobroling.dev",
   devToolbar: {
     enabled: false
@@ -11,5 +14,5 @@ export default defineConfig({
   vite: {
     // plugins: [tailwindcss()]
   },
-  integrations: [icon()],
+  integrations: [icon(), sitemap()]
 });

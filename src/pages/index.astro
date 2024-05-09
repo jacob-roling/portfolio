@@ -21,37 +21,8 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
   <Fragment slot="head">
     <title>Jacob Roling - Software Engineer</title>
   </Fragment>
-  <header class="print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-4 border-b border-b-neutral-border">
-    <nav>
-      <ul class="flex gap-4" role="list">
-        <li class="sr-only focus-within:not-sr-only">
-          <a class="button" href="#main">Skip to content</a>
-        </li>
-        <li>
-          <a class="button" href="/">Home</a>
-        </li>
-        <li>
-          <a class="button" href="/blog">Blog</a>
-        </li>
-        <li>
-          <a class="button" href="/#projects">Projects</a>
-        </li>
-        <li class="ml-auto">
-          <label for="theme-switcher">Theme</label>
-          <select name="theme-switcher" id="theme-switcher">
-            <option value="auto">Auto</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-          </select>
-        </li>
-        <li>
-          <button class="button" onclick="print()">Print</button>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="main" class="container typography text-[1.125rem] pt-24 print:pt-0">
+  
+  <main class="container typography text-[1.125rem] pt-24 print:pt-0">
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-3 md:col-span-2">
         <hgroup>

@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.4",
     "@radix-ui/colors": "^3.0.0",
     "astro": "^4.7.1",
+    "htmx.org": "^1.9.12",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.0"
   },

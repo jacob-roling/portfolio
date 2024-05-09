@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+
+export const partial = true;
+
+export async function getStaticPaths({ paginate }) {
+  const articles = await getCollection("articles");
+  return paginate(articles, { pageSize: 3 });
+}
+
+const { page } = Astro.props;
+---
+
+<ul role="list">
+  {
+    page.data.map(({ slug, data: { title } }) => (
+      <li>
+        <a href={`/blog/${slug}/`}>
+          <h2>{title}</h2>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+{page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
+{page.url.next ? <a href={page.url.next}>Next</a> : null}

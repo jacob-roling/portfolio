@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import Base from "#layouts/Base.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const articles = await getCollection("articles");
+
+  return articles.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+    props: post,
+  }));
+}
+
+const {
+  slug,
+  data: { title },
+} = Astro.props;
+
+const { Content, headings } = await Astro.props.render();
+---
+
+<Base>
+  <main id="main" class="container pt-24 typography">
+    <h1>{title}</h1>
+    <Content />
+  </main>
+  <aside></aside>
+</Base>
