@@ -1,0 +1,152 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: .875em;
+  font-weight: 500;
+  padding-block: .25em;
+  padding-inline: .5em;
+  border-radius: var(--border-radius);
+
+  @media print {
+    padding: 0;
+    font-size: inherit;
+  }
+}
+
+.typography {
+  h1 {
+    font-size: 3em;
+    line-height: 1.125;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    line-height: 1.25;
+    font-weight: 600;
+    margin-block-end: .5em;
+    
+    &:not(:first-child) {
+      margin-block-start: 1em;
+    }
+  }
+
+  h3 {
+    line-height: 1.25;
+    font-weight: 600;
+    margin-block-end: .5em;
+
+    &:not(:first-child) {
+      margin-block: 1em;
+    }
+  }
+
+  p,
+  ul,
+  ol {
+    margin-block-end: 1em;
+  }
+
+  a {
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  ul,
+  ol {
+    margin-left: 2em;
+  }
+
+  hgroup {
+    > p {
+      margin-block-end: .5em;
+    }
+
+    > h2 {
+      margin-block-end: 0;
+    }
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ol,
+  ul {
+    max-width: 65ch;
+  }
+}
+
+.container {
+  --_padding: 2rem;
+  --_width: 100%;
+  display: grid;
+  grid-template-columns: [breakout-start] var(--_padding) 1fr [child-start] minmax(0, var(--_width)) [child-end] 1fr var(--_padding) [breakout-end];
+
+  @media (--sm) {
+    --_width: 640px;
+  }
+
+  @media (--md) {
+    --_width: 768px;
+  }
+
+  @media (--lg) {
+    --_width: 1024px;
+  }
+
+  @media (--xl) {
+    --_width: 1280px;
+  }
+
+  @media (--2xl) {
+    --_width: 1536px;
+  }
+
+  &>* {
+    grid-column: child;
+
+    &.breakout {
+      grid-column: breakout;
+    }
+
+    &.breakout-start {
+      grid-column: breakout-start / child-end;
+    }
+
+    &.breakout-end {
+      grid-column: child-start / breakout-end;
+    }
+  }
+}
+
+
+textarea {
+  padding-inline: 0.5em;
+  padding-block: 0.25em;
+}
+
+[type='text'] {
+  padding-inline: 0.5em;
+  padding-block: 0.25em;
+}
+
+.expand-to-relative::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+fieldset {
+  border-width: var(--border-width);
+  padding: 1rem;
+}

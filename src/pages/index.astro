@@ -1,0 +1,153 @@
+---
+import Base from "../layouts/Base.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import jacobRolingImage from "../assets/jacob roling.jpg";
+import { experience, education, skills } from "../data";
+import { getCollection } from 'astro:content';
+
+
+const projects = await getCollection('articles', ({data}) => data.tags.includes("Project"));
+
+const latestPosts = (await getCollection('articles')).sort((a, b) => a.data.datePublished.getTime() - b.data.datePublished.getTime());
+
+const dateFormatter = new Intl.DateTimeFormat('en-AU', {
+  year: 'numeric',
+  month: 'short'
+});
+---
+
+<Base>
+  <Fragment slot="head">
+    <title>Jacob Roling - Software Engineer</title>
+  </Fragment>
+  <header class="print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-4 border-b border-b-neutral-border">
+    <nav>
+      <ul class="flex gap-4" role="list">
+        <li class="sr-only focus-within:not-sr-only">
+          <a class="button" href="#main">Skip to content</a>
+        </li>
+        <li>
+          <a class="button" href="/">Home</a>
+        </li>
+        <li>
+          <a class="button" href="/blog">Blog</a>
+        </li>
+        <li>
+          <a class="button" href="/#projects">Projects</a>
+        </li>
+        <li class="ml-auto">
+          <label for="theme-switcher">Theme</label>
+          <select name="theme-switcher" id="theme-switcher">
+            <option value="auto">Auto</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </li>
+        <li>
+          <button class="button" onclick="print()">Print</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container typography text-[1.125rem] pt-24 print:pt-0">
+    <div class="grid grid-cols-3 gap-8">
+      <div class="col-span-3 md:col-span-2">
+        <hgroup>
+          <h1 id="jacob-roling">Jacob Roling</h1>
+          <p>Software Engineer</p>
+        </hgroup>
+        <p>
+          Software engineer focused on building products with extra attention to
+          detail.
+        </p>
+        <p>
+          <Icon class="inline" name="heroicons:map-pin" aria-hidden="true" />
+          <span class="sr-only">I am located in </span>
+          Adelaide, South Australia<span class="sr-only">.</span>
+        </p>
+      </div>
+      <div class="hidden md:block">
+        <Image
+          class="ml-auto"
+          src={jacobRolingImage}
+          alt="Jacob Roling"
+          height={200}
+        />
+      </div>
+    </div>
+    <h2 id="about">About Me</h2>
+    <p>
+      Hi, I have been teaching myself to code since I was 12 and for the past 6
+      years, focused heavily on full-stack software engineering. My strength
+      lies in learning quickly and focusing on fundamentals so I may apply my
+      knowledge to a variety of subjects. My ambition is to use my experience to
+      create value by solving problems with solutions that are simple, reliable
+      and efficient as possible.
+    </p>
+    <h2 id="work-experience">Work Experience</h2>
+    <div>
+      {
+        experience.map(({ company, role, remote, description, date }) => (
+          <div>
+            <div class="flex justify-between gap-8">
+              <hgroup>
+                <h3>
+                  {company} {remote ? <span class="badge print:!hidden print:!text-[1em]">Remote</span><span class="hidden print:inline">(remote)</span> : null}
+                </h3>
+                <p>{role}</p>
+              </hgroup>
+              <div class="mt-[1em]">
+                <time datetime={date.started.toISOString()}>{dateFormatter.format(date.started)}</time>
+                <span>-</span>
+                {date.ended ? <time datetime={date.ended.toISOString()}>{dateFormatter.format(date.ended)}</time> : <span>Present</span>}
+              </div>
+            </div>
+            <p>{description ? description : null}</p>
+          </div>
+        ))
+      }
+    </div>
+    <h2 id="education">Education</h2>
+    <div>
+      {
+        education.map(({ institution, qualifiation, highlights, dateCompleted }) => (
+          <div>
+            <div class="flex justify-between gap-8">
+              <hgroup>
+                <h3>{qualifiation}</h3>
+                <p>{institution}</p>
+              </hgroup>
+              <div class="mt-[1em]">
+                {dateCompleted ? <time datetime={dateCompleted.toISOString()}>{dateCompleted.getFullYear()}</time> : null}
+              </div>
+            </div>
+            <p>{highlights}</p>
+          </div>
+        ))
+      }
+    </div>
+    <h2 id="skills">Skills</h2>
+    <p>{skills.map(skill => <span class="badge">{skill}</span>)}</p>
+    <h2 id="projects" class="print:hidden">Projects</h2>
+    <div class="print:hidden grid grid-cols-3 gap-4">
+      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border border-neutral-border rounded bg-neutral-background-subtle hover:border-neutral-border-element">
+        <header>
+          <a class="expand-to-relative" href={`/blog/${slug}`}>
+            <h3>{title}</h3>
+          </a>
+        </header>
+        <p>
+          {description}
+        </p>
+      </article>)}
+    </div>
+    <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
+    <div class="print:hidden">
+      {latestPosts.map(({data: {title}}) => <div>
+        <h3>{title}</h3>  
+      </div>)}
+    </div>
+  </main>
+</Base>
