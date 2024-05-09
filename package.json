@@ -10,8 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.5",
     "@radix-ui/colors": "^3.0.0",
-    "astro": "^4.7.1"
+    "astro": "^4.7.1",
+    "markdown-it": "^14.1.0",
+    "sanitize-html": "^2.13.0"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.1.21",

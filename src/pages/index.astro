@@ -9,7 +9,7 @@ import { getCollection } from 'astro:content';
 
 const projects = await getCollection('articles', ({data}) => data.tags.includes("Project"));
 
-const latestPosts = (await getCollection('articles')).sort((a, b) => a.data.datePublished.getTime() - b.data.datePublished.getTime());
+const latestPosts = (await getCollection('articles')).sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
 
 const dateFormatter = new Intl.DateTimeFormat('en-AU', {
   year: 'numeric',
@@ -134,7 +134,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
     <div class="print:hidden grid grid-cols-3 gap-4">
       {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border border-neutral-border rounded bg-neutral-background-subtle hover:border-neutral-border-element">
         <header>
-          <a class="expand-to-relative" href={`/blog/${slug}`}>
+          <a class="expand-to-relative" href={`/blog/${slug}/`}>
             <h3>{title}</h3>
           </a>
         </header>

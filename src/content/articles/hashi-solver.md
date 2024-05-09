@@ -1,7 +1,7 @@
 ---
 title: Hashi Solver
 description: Hashi Solver
-datePublished: 2010-02-11
+datePublished: 2024-01-03
 tags:
   - Project
 ---

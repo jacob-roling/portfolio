@@ -1,0 +1,26 @@
+import rss from '@astrojs/rss';
+import { getCollection } from 'astro:content';
+import sanitizeHtml from 'sanitize-html';
+import MarkdownIt from 'markdown-it';
+
+const parser = new MarkdownIt();
+
+export async function GET(context) {
+  const articles = await getCollection('articles');
+
+  return rss({
+    title: "Jacob's Blog",
+    description: "A humble Astronaut's guide to the stars",
+    site: context.site,
+    items: articles.map(({slug, body, data: { title, description, datePublished }}) => ({
+      title,
+      description,
+      pubDate: datePublished,
+      link: `/blog/${slug}/`,
+      content: sanitizeHtml(parser.render(body), {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
+      }),
+    })),
+    customData: `<language>en-au</language>`,
+  });
+}

@@ -1,7 +1,7 @@
 ---
 title: Rustache
 description: Rustache
-datePublished: 2010-02-11
+datePublished: 2024-01-06
 tags:
   - Project
 ---
