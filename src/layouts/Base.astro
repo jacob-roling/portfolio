@@ -21,7 +21,7 @@ import "../style/global.css";
     <header
       class="print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-4 border-b border-b-neutral-border"
     >
-      <nav aria-label="Primary Navigation">
+      <nav aria-label="primary">
         <ul class="flex gap-4" role="list">
           <li class="sr-only focus-within:not-sr-only">
             <a class="button" href="#main">Skip to content</a>
@@ -51,8 +51,8 @@ import "../style/global.css";
     </header>
     <slot />
     <footer class="container">
-      <nav aria-label="Secondary Navigation">
-        <ul>
+      <nav aria-label="footer">
+        <ul role="list">
           <li>
             <a href="/sitemap-index.xml">Sitemap</a>
           </li>

@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import jacobRolingImage from "../assets/jacob roling.jpg";
+import jacobRolingImage from "../assets/jacob-roling.webp";
 import { experience, education, skills } from "../data";
 import { getCollection } from 'astro:content';
 
@@ -21,7 +21,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
   <Fragment slot="head">
     <title>Jacob Roling - Software Engineer</title>
   </Fragment>
-  
+
   <main class="container typography text-[1.125rem] pt-24 print:pt-0">
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-3 md:col-span-2">
@@ -100,16 +100,16 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
       }
     </div>
     <h2 id="skills">Skills</h2>
-    <p>{skills.map(skill => <span class="badge">{skill}</span>)}</p>
+    <ul class="ml-0 flex flex-wrap gap-2" role="list">{skills.map(skill => <li class="badge">{skill}</li>)}</ul>
     <h2 id="projects" class="print:hidden">Projects</h2>
     <div class="print:hidden grid grid-cols-3 gap-4">
-      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border border-neutral-border rounded bg-neutral-background-subtle hover:border-neutral-border-element">
+      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border border-neutral-border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element">
         <header>
           <a class="expand-to-relative" href={`/blog/${slug}/`}>
             <h3>{title}</h3>
           </a>
         </header>
-        <p>
+        <p class="line-clamp-3">
           {description}
         </p>
       </article>)}
