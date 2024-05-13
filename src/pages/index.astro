@@ -112,7 +112,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
     <div class="grid print:hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element transition-colors">
         <header>
-          <a href={`/blog/${slug}/`}>
+          <a href={`/blog/${slug}`}>
             <h3>{title}</h3>
             <span class="expand-to-relative"></span>
           </a>
@@ -125,7 +125,7 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
     <div class="print:hidden">
       {latestPosts.map(({slug, data: {title}}) => <div class="relative">
-          <a href={`/blog/${slug}/`}>
+          <a href={`/blog/${slug}`}>
             <h3>{title}</h3>
             <span class="expand-to-relative"></span>
           </a>

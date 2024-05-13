@@ -37,7 +37,7 @@ const { page } = Astro.props;
       {
         page.data.map(({ slug, data: { title } }) => (
           <li>
-            <a href={`/blog/${slug}/`}>
+            <a href={`/blog/${slug}`}>
               <h2>{title}</h2>
             </a>
           </li>
@@ -49,7 +49,7 @@ const { page } = Astro.props;
         {
           page.url.prev ? (
             <li>
-              <a href={`${page.url.prev}/`}>
+              <a href={page.url.prev}>
                 Previous <span class="sr-only">page</span>
               </a>
             </li>
@@ -61,7 +61,7 @@ const { page } = Astro.props;
         {
           page.url.next ? (
             <li>
-              <a href={`${page.url.next}/`}>
+              <a href={page.url.next}>
                 Next <span class="sr-only">page</span>
               </a>
             </li>

@@ -12,11 +12,12 @@ export async function GET(context) {
     title: "Jacob's Blog",
     description: "A humble Astronaut's guide to the stars",
     site: context.site,
+    trailingSlash: false,
     items: articles.map(({slug, body, data: { title, description, datePublished }}) => ({
       title,
       description,
       pubDate: datePublished,
-      link: `/blog/${slug}/`,
+      link: `/blog/${slug}`,
       content: sanitizeHtml(parser.render(body), {
         allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img'])
       }),

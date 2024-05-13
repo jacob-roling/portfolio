@@ -37,7 +37,7 @@ export const education = [
   {
     qualifiation: "South Australian Certificate of Education (SACE)",
     institution: "University Senior College",
-    highlights: "Achieved 'A' grade on final year research project for which I programmed a physics engine in JavaScript.",
+    highlights: "Achieved 'A' grade on final year research project for which I programmed a 2D physics engine in JavaScript.",
     dateCompleted: new Date(Date.UTC(2022))
   }
 ];

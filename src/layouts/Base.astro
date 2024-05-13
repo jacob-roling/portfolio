@@ -11,7 +11,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={canonicalURL.href.slice(0, -1)} />
     <!-- Idiomorph -->
     <script src="https://unpkg.com/idiomorph/dist/idiomorph-ext.min.js"
     ></script>
@@ -20,10 +20,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="alternate"
       type="application/rss+xml"
       title="Jacob Roling"
-      href={`${Astro.site}rss.xml/`}
+      href={`${Astro.site}rss.xml`}
     />
     <!-- Sitemap -->
-    <link rel="sitemap" href="/sitemap-index.xml/" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- PageFind -->
     {import.meta.env.PROD ? <script src="/pagefind/pagefind-ui.js" /> : null}
     <!-- Custom -->
@@ -43,7 +43,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <a class="button" href="/">Home</a>
           </li>
           <li>
-            <a class="button" href="/blog/page/1/">Blog</a>
+            <a class="button" href="/blog/page/1">Blog</a>
           </li>
           <li>
             <a class="button" href="/#projects">Projects</a>
@@ -84,10 +84,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <nav aria-label="footer">
         <ul class="flex gap-4 items-center" role="list">
           <li>
-            <a href="/sitemap-index.xml/">Sitemap</a>
+            <a href="/sitemap-index.xml">Sitemap</a>
           </li>
           <li>
-            <a href="/rss.xml/">RSS</a>
+            <a href="/rss.xml">RSS</a>
           </li>
         </ul>
       </nav>

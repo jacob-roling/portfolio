@@ -12,6 +12,7 @@ import node from "@astrojs/node";
 export default defineConfig({
   output: 'hybrid',
   site: "https://jacobroling.dev",
+  trailingSlash: 'never',
   devToolbar: {
     enabled: false
   },
@@ -26,8 +27,8 @@ export default defineConfig({
     playformCompress()
   ],
   redirects: {
-    '/blog/': '/blog/page/1/',
-    '/blog/page/': '/blog/page/1/'
+    '/blog': '/blog/page/1',
+    '/blog/page': '/blog/page/1'
   },
   adapter: node({
     mode: "standalone"
