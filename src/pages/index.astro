@@ -1,9 +1,9 @@
 ---
-import Base from "../layouts/Base.astro";
+import Base from "#/layouts/Base.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import jacobRolingImage from "../assets/jacob-roling.webp";
-import { experience, education, skills } from "../data";
+import jacobRolingImage from "#/assets/jacob-roling.webp";
+import { experience, education, skills } from "#/data";
 import { getCollection } from 'astro:content';
 
 
@@ -19,25 +19,29 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
 
 <Base>
   <Fragment slot="head">
-    <title>Jacob Roling - Software Engineer</title>
+    <title>Jacob Roling — Software Engineer</title>
+    <meta name="description" content="Jacob Roling is a software engineer based in South Australia, he is an experienced web and backend developer with a high proficiency in HTML, JavaScript, CSS, Rust, Go and accessibility.">
   </Fragment>
 
   <main class="container typography text-[1.125rem] pt-24 print:pt-0">
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-3 md:col-span-2">
-        <hgroup>
-          <h1 id="jacob-roling">Jacob Roling</h1>
-          <p>Software Engineer</p>
-        </hgroup>
+        <h1 id="jacob-roling" class="print:text-[2rem]">Jacob Roling</h1>
         <p>
-          Software engineer focused on building products with extra attention to
-          detail.
+          Software engineer focused on building products with simplicity and accessibility in mind.
         </p>
-        <p>
-          <Icon class="inline" name="heroicons:map-pin" aria-hidden="true" />
-          <span class="sr-only">I am located in </span>
-          Adelaide, South Australia<span class="sr-only">.</span>
-        </p>
+        <ul role="list">
+          <li class="hidden print:block">
+            <Icon class="inline" name="heroicons:globe-alt" aria-hidden="true" />
+            <span class="sr-only">My website is </span>
+            <a href={Astro.site}>{Astro.site}</a>
+          </li>
+          <li>
+            <Icon class="inline" name="heroicons:map-pin" aria-hidden="true" />
+            <span class="sr-only">I am located in </span>
+            Adelaide, South Australia<span class="sr-only">.</span>
+          </li>
+        </ul>
       </div>
       <div class="hidden md:block">
         <Image
@@ -57,18 +61,23 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
       create value by solving problems with solutions that are simple, reliable
       and efficient as possible.
     </p>
+    <h2 id="skills">Skills</h2>
+    <ul class="flex flex-wrap gap-2 print:hidden" role="list">{skills.map(skill => <li class="badge">{skill}</li>)}</ul>
+    <p class="hidden print:block">
+      {skills.join(', ')}
+    </p>
     <h2 id="work-experience">Work Experience</h2>
     <div>
       {
         experience.map(({ company, role, remote, description, date }) => (
           <div>
             <div class="flex justify-between gap-8">
-              <hgroup>
+              <div class="hgroup">
                 <h3>
                   {company} {remote ? <span class="badge print:!hidden print:!text-[1em]">Remote</span><span class="hidden print:inline">(remote)</span> : null}
                 </h3>
                 <p>{role}</p>
-              </hgroup>
+              </div>
               <div class="mt-[1em]">
                 <time datetime={date.started.toISOString()}>{dateFormatter.format(date.started)}</time>
                 <span>-</span>
@@ -86,10 +95,10 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
         education.map(({ institution, qualifiation, highlights, dateCompleted }) => (
           <div>
             <div class="flex justify-between gap-8">
-              <hgroup>
+              <div class="hgroup">
                 <h3>{qualifiation}</h3>
                 <p>{institution}</p>
-              </hgroup>
+              </div>
               <div class="mt-[1em]">
                 {dateCompleted ? <time datetime={dateCompleted.toISOString()}>{dateCompleted.getFullYear()}</time> : null}
               </div>
@@ -99,14 +108,13 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
         ))
       }
     </div>
-    <h2 id="skills">Skills</h2>
-    <ul class="ml-0 flex flex-wrap gap-2" role="list">{skills.map(skill => <li class="badge">{skill}</li>)}</ul>
     <h2 id="projects" class="print:hidden">Projects</h2>
-    <div class="print:hidden grid grid-cols-3 gap-4">
-      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border border-neutral-border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element">
+    <div class="grid print:hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element transition-colors">
         <header>
-          <a class="expand-to-relative" href={`/blog/${slug}/`}>
+          <a href={`/blog/${slug}/`}>
             <h3>{title}</h3>
+            <span class="expand-to-relative"></span>
           </a>
         </header>
         <p class="line-clamp-3">
@@ -116,8 +124,11 @@ const dateFormatter = new Intl.DateTimeFormat('en-AU', {
     </div>
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
     <div class="print:hidden">
-      {latestPosts.map(({data: {title}}) => <div>
-        <h3>{title}</h3>  
+      {latestPosts.map(({slug, data: {title}}) => <div class="relative">
+          <a href={`/blog/${slug}/`}>
+            <h3>{title}</h3>
+            <span class="expand-to-relative"></span>
+          </a>
       </div>)}
     </div>
   </main>

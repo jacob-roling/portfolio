@@ -1,0 +1,19 @@
+---
+const parts = Astro.url.pathname.split("/").slice(1, -1);
+const current = parts.pop();
+---
+
+<nav aria-label="breadcrumb">
+  <ul class="breadcrumb" role="list">
+    {
+      parts.map((part, i) => (
+        <li>
+          <a href={`/${parts.slice(0, i + 1).join("/")}`}>{part}</a>
+        </li>
+      ))
+    }
+    <li>
+      <a href="#" aria-current="page">{current}</a>
+    </li>
+  </ul>
+</nav>

@@ -1,12 +1,12 @@
 export const experience = [
   {
-    role: "Full Stack Software Engineer",
+    role: "Full Stack Software Engineer and Business Owner",
     company: "Compose Digital",
     date: {
       started: new Date(Date.UTC(2023, 0)),
       ended: null,
     },
-    description: "I started my own business, Compose Digital to provide value to business in any way I can with my full stack software engineering experience. Predominantly I build websites but where required, also create back end services.",
+    description: "I started my own business, Compose Digital to provide value to businesses looking at building a digital presence. My role predominantly involves programming websites and back end services, setting up automations, customer service, sales and business management.",
     remote: true
   },
   {
@@ -16,7 +16,7 @@ export const experience = [
       started: new Date(Date.UTC(2022, 0)),
       ended: new Date(Date.UTC(2023, 5)),
     },
-    description: null,
+    description: "My role focused primarily on safe food handling including cooking and assembly and sometimes involved dishwashing, cleaning, and customer service.",
     remote: false
   },
   {
@@ -26,7 +26,7 @@ export const experience = [
       started: new Date(Date.UTC(2018, 10)),
       ended: new Date(Date.UTC(2019, 11)),
     },
-    description: null,
+    description: "My role focused primarily on presentation, customer service and point of sale including money handling and sometimes involved cleaning, sorting and tagging.",
     remote: false
   }
 ];

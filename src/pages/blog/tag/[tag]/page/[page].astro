@@ -1,0 +1,30 @@
+---
+import Base from "#layouts/Base.astro";
+import { getCollection } from "astro:content";
+import { slugify } from "#utils";
+import Breadcrumb from "#components/Breadcrumb.astro";
+
+export async function getStaticPaths({ paginate }) {
+  const articles = await getCollection("articles");
+  const tags = Array.from(
+    new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
+  );
+
+  return tags.flatMap((unslugifiedTag) => {
+    const tag = slugify(unslugifiedTag);
+    const filteredArticles = articles.filter((article) =>
+      article.data.tags.map(slugify).includes(tag)
+    );
+    return paginate(filteredArticles, { params: { tag }, pageSize: 3 });
+  });
+}
+
+const articles = await getCollection("articles");
+
+const tags = Array.from(
+  new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
+);
+
+const { tag } = Astro.params;
+const { page } = Astro.props;
+---

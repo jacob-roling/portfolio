@@ -1,5 +1,8 @@
 ---
-import "../style/global.css";
+import { Icon } from "astro-icon/components";
+import "#/style/global.css";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <html lang="en" class="dark">
@@ -8,18 +11,28 @@ import "../style/global.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <!-- Idiomorph -->
+    <script src="https://unpkg.com/idiomorph/dist/idiomorph-ext.min.js"
+    ></script>
+    <!-- RSS -->
     <link
       rel="alternate"
       type="application/rss+xml"
       title="Jacob Roling"
-      href={`${Astro.site}rss.xml`}
+      href={`${Astro.site}rss.xml/`}
     />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml/" />
+    <!-- PageFind -->
+    {import.meta.env.PROD ? <script src="/pagefind/pagefind-ui.js" /> : null}
+    <!-- Custom -->
     <slot name="head" />
+    <!-- Generated -->
   </head>
-  <body hx-boost="true">
+  <body hx-boost="true" hx-ext="morph">
     <header
-      class="print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-4 border-b border-b-neutral-border"
+      class="z-10 print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-2 border-b"
     >
       <nav aria-label="primary">
         <ul class="flex gap-4" role="list">
@@ -30,37 +43,60 @@ import "../style/global.css";
             <a class="button" href="/">Home</a>
           </li>
           <li>
-            <a class="button" href="/blog">Blog</a>
+            <a class="button" href="/blog/page/1/">Blog</a>
           </li>
           <li>
             <a class="button" href="/#projects">Projects</a>
           </li>
-          <li class="ml-auto">
+          <!-- <li>
             <label for="theme-switcher">Theme</label>
             <select name="theme-switcher" id="theme-switcher">
               <option value="auto">Auto</option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
             </select>
-          </li>
+          </li> -->
           <li>
             <button class="button" onclick="print()">Print</button>
+          </li>
+          <li class="ml-auto">
+            <button class="button outline">
+              <Icon
+                class="inline"
+                name="heroicons:magnifying-glass"
+                aria-hidden="true"
+              />
+              Search
+              <span class="badge">
+                <kbd>Ctrl</kbd> + <kbd>k</kbd>
+              </span>
+            </button>
           </li>
         </ul>
       </nav>
     </header>
+
     <slot />
-    <footer class="container">
+
+    <footer
+      class="mt-8 container typography print:hidden bg-neutral-background-subtle py-4 border-t"
+    >
       <nav aria-label="footer">
-        <ul role="list">
+        <ul class="flex gap-4 items-center" role="list">
           <li>
-            <a href="/sitemap-index.xml">Sitemap</a>
+            <a href="/sitemap-index.xml/">Sitemap</a>
+          </li>
+          <li>
+            <a href="/rss.xml/">RSS</a>
           </li>
         </ul>
       </nav>
+      <p class="mt-4">&copy; {new Date().getFullYear()} Jacob Roling</p>
     </footer>
+
     <script>
-      import "htmx.org";
+      import htmx from "htmx.org";
+      window.htmx = htmx;
     </script>
   </body>
 </html>

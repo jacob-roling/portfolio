@@ -1,39 +1,73 @@
 ---
+import Base from "#layouts/Base.astro";
 import { getCollection } from "astro:content";
-
-export const partial = true;
+import { slugify } from "#utils";
+import Breadcrumb from "#components/Breadcrumb.astro";
 
 export async function getStaticPaths({ paginate }) {
   const articles = await getCollection("articles");
   return paginate(articles, { pageSize: 3 });
 }
 
+const articles = await getCollection("articles");
+
+const tags = Array.from(
+  new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
+);
+
 const { page } = Astro.props;
 ---
 
-<ul role="list">
-  {
-    page.data.map(({ slug, data: { title } }) => (
-      <li>
-        <a href={`/blog/${slug}/`}>
-          <h2>{title}</h2>
-        </a>
-      </li>
-    ))
-  }
-</ul>
-
-{
-  page.url.prev ? (
-    <a href={page.url.prev}>
-      Previous <span class="sr-only">page</span>
-    </a>
-  ) : null
-}
-{
-  page.url.next ? (
-    <a href={page.url.next}>
-      Next <span class="sr-only">page</span>
-    </a>
-  ) : null
-}
+<Base>
+  <main id="main" class="container pt-24 typography">
+    <Breadcrumb />
+    <h1 id="blog">Blog</h1>
+    <ul role="list">
+      {
+        tags.map((tag) => (
+          <li class="inline">
+            <a href={`/blog/tag/${slugify(tag)}/page/1`} class="badge">
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <ul role="list">
+      {
+        page.data.map(({ slug, data: { title } }) => (
+          <li>
+            <a href={`/blog/${slug}/`}>
+              <h2>{title}</h2>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <nav aria-label="pagination">
+      <ul role="list">
+        {
+          page.url.prev ? (
+            <li>
+              <a href={`${page.url.prev}/`}>
+                Previous <span class="sr-only">page</span>
+              </a>
+            </li>
+          ) : null
+        }
+        <li>
+          <a href="#" aria-current="page">{page.current}</a>
+        </li>
+        {
+          page.url.next ? (
+            <li>
+              <a href={`${page.url.next}/`}>
+                Next <span class="sr-only">page</span>
+              </a>
+            </li>
+          ) : null
+        }
+      </ul>
+    </nav>
+  </main>
+</Base>

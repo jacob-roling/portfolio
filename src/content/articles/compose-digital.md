@@ -4,6 +4,7 @@ description: Compose Digital offers website design and development, search engin
 datePublished: 2024-01-02
 tags:
   - Project
+  - Compose Digital
 ---
 
 Compose Digital offers website design and development, search engine optimisation and workflow automation solutions for businesses.

@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "#layouts/Base.astro";
+import Breadcrumb from "#components/Breadcrumb.astro";
 
 export async function getStaticPaths({ paginate }) {
   const articles = await getCollection("articles");
@@ -15,14 +16,20 @@ export async function getStaticPaths({ paginate }) {
 
 const {
   slug,
-  data: { title },
+  data: { title, description },
 } = Astro.props;
 
 const { Content, headings } = await Astro.props.render();
 ---
 
 <Base>
+  <Fragment slot="head">
+    <title>{`${title} — Jacob Roling`}</title>
+    <meta name="description" content={description} />
+  </Fragment>
+
   <main id="main" class="container pt-24 typography">
+    <Breadcrumb />
     <h1>{title}</h1>
     <Content />
   </main>

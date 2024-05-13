@@ -4,9 +4,12 @@
   justify-content: center;
   font-size: .875em;
   font-weight: 500;
-  padding-block: .25em;
-  padding-inline: .5em;
+  padding: .25em;
+  line-height: 1;
+  
   border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  border-color: transparent;
 
   @media print {
     padding: 0;
@@ -25,7 +28,6 @@
     font-size: 1.5em;
     line-height: 1.25;
     font-weight: 600;
-    margin-block-end: .5em;
     
     &:not(:first-child) {
       margin-block-start: 1em;
@@ -35,11 +37,15 @@
   h3 {
     line-height: 1.25;
     font-weight: 600;
-    margin-block-end: .5em;
 
     &:not(:first-child) {
       margin-block: 1em;
     }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin-block-end: .5em;
+    scroll-margin-block: 4em;
   }
 
   p,
@@ -53,20 +59,24 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
+
+    transition-duration: var(--default-transition-timing-function);
+    transition-timing-function: var(--default-transition-timing-function);
   }
 
   ul,
   ol {
-    margin-left: 2em;
+    margin-inline-start: 2em;
+
+    &[role='list'] {
+      margin-inline-start: 0;
+    }
   }
 
-  hgroup {
-    > p {
-      margin-block-end: .5em;
-    }
-
-    > h2 {
-      margin-block-end: 0;
+  /* Some screen readers dont work with hgroup so use a div with a 'hgroup' class */
+  .hgroup {
+    > h1, h2, h3, h4, h5 {
+      margin-block-end: .25em;
     }
   }
 
@@ -137,8 +147,7 @@ textarea {
   padding-block: 0.25em;
 }
 
-.expand-to-relative::after {
-  content: "";
+.expand-to-relative {
   display: block;
   position: absolute;
   top: 0;
@@ -189,5 +198,34 @@ fieldset {
     position: sticky;
     top: 0;
     z-index: 2;
+  }
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
+  
+  line-height: 1.125;
+  
+  padding-inline: 1em;
+  padding-block: .5em;
+
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  border-color: transparent;
+
+  transition-duration: var(--default-transition-timing-function);
+  transition-timing-function: var(--default-transition-timing-function);
+}
+
+.breadcrumb {
+  > li {
+    display: inline;
+
+    &:not(:last-child)::after {
+      content: attr(data-delimiter, '/');
+    }
   }
 }

@@ -30,7 +30,8 @@
   --color-primary-solid-hover: var(--iris-10);
   --color-primary-text: var(--iris-11);
   --color-primary-text-high-contrast: var(--iris-12);
-  
+  --color-primary-text-solid-contrast: #fff;
+
   --color-neutral-background: var(--gray-1);
   --color-neutral-background-subtle: var(--gray-2);
   --color-neutral-background-element: var(--gray-3);
@@ -43,6 +44,7 @@
   --color-neutral-solid-hover: var(--gray-10);
   --color-neutral-text: var(--gray-11);
   --color-neutral-text-high-contrast: var(--gray-12);
+  --color-neutral-text-solid-contrast: #fff;
 }
 
 :root {
@@ -65,8 +67,10 @@ h1, h2, h3, hgroup > p {
 .typography {
   a {
     text-decoration-color: var(--color-neutral-text);
+    transition-property: color, text-decoration-color;
 
     &:hover {
+      color: var(--color-neutral-text-high-contrast);
       text-decoration-color: var(--color-neutral-text-high-contrast);
     }
   }
@@ -80,5 +84,43 @@ h1, h2, h3, hgroup > p {
 .container {
   @media (--xl) {
     --_width: 1024px;
+  }
+}
+
+.button {
+  color: var(--color-neutral-text-high-contrast);
+  transition-property: color, background-color, border-color, box-shadow;
+
+  > .badge {
+    border-color: var(--color-neutral-border-element);
+    border-top-width: calc(var(--border-width) + 1px);
+  }
+  
+  &:hover {
+    background-color: var(--color-neutral-hover);
+
+    >.badge {
+      background-color: var(--color-neutral-hover);
+    }
+  }
+
+
+  &.outline {
+    border-color: var(--color-neutral-border-element);
+
+    &:hover {
+      background-color: var(--color-neutral-hover);
+      border-color: var(--color-neutral-border-hover);
+    }
+  }
+
+  &.solid {
+    background-color: var(--color-neutral-solid);
+    border-color: var(--color-neutral-solid);
+    color: var(--color-neutral-text-solid-contrast);
+
+    &:hover {
+      background-color: var(--color-neutral-solid-hover);
+    }
   }
 }
