@@ -7,9 +7,8 @@ import { experience, education, skills } from "#/data";
 import { getCollection } from 'astro:content';
 import { monthFormatter } from "#utils"; 
 
-const projects = await getCollection('articles', ({data}) => data.tags.includes("Project"));
-
-const latestPosts = (await getCollection('articles')).sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()).slice(0, 3);
+const articles = (await getCollection('articles')).sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
+const projects = articles.filter(({data}) => data.tags.includes("Project"));
 ---
 
 <Base>
@@ -121,7 +120,7 @@ const latestPosts = (await getCollection('articles')).sort((a, b) => b.data.date
     </div>
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
     <div class="print:hidden">
-      {latestPosts.map(({slug, data: {title, description}}) => <div class="relative">
+      {articles.slice(0, 3).map(({slug, data: {title, description}}) => <div class="relative">
           <a href={`/blog/${slug}`}>
             <h3>{title}</h3>
               <span class="expand-to-relative" aria-hidden="true" />
