@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-wrap: nowrap;
   font-size: .875em;
   font-weight: 500;
   padding: .25em;
@@ -10,6 +11,9 @@
   border-radius: var(--border-radius);
   border-width: var(--border-width);
   border-color: transparent;
+
+  transition-duration: var(--default-transition-duration);
+  transition-timing-function: var(--default-transition-timing-function);
 
   @media print {
     padding: 0;
@@ -58,9 +62,9 @@
     font-weight: 500;
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-underline-offset: 0.125em;
 
-    transition-duration: var(--default-transition-timing-function);
+    transition-duration: var(--default-transition-duration);
     transition-timing-function: var(--default-transition-timing-function);
   }
 
@@ -216,7 +220,7 @@ fieldset {
   border-width: var(--border-width);
   border-color: transparent;
 
-  transition-duration: var(--default-transition-timing-function);
+  transition-duration: var(--default-transition-duration);
   transition-timing-function: var(--default-transition-timing-function);
 }
 

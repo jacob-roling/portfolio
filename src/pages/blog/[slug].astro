@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Base from "#layouts/Base.astro";
 import Breadcrumb from "#components/Breadcrumb.astro";
+import { dayFormatter } from "#utils";
 
 export async function getStaticPaths({ paginate }) {
   const articles = await getCollection("articles");
@@ -16,7 +17,7 @@ export async function getStaticPaths({ paginate }) {
 
 const {
   slug,
-  data: { title, description },
+  data: { title, description, datePublished },
 } = Astro.props;
 
 const { Content, headings } = await Astro.props.render();
@@ -31,6 +32,11 @@ const { Content, headings } = await Astro.props.render();
   <main id="main" class="container pt-24 typography">
     <Breadcrumb />
     <h1>{title}</h1>
+    <p>
+      <time datetime={datePublished.toISOString()}>
+        {dayFormatter.format(datePublished)}
+      </time>
+    </p>
     <Content />
   </main>
   <aside></aside>

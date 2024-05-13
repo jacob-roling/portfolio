@@ -5,7 +5,9 @@ import { slugify } from "#utils";
 import Breadcrumb from "#components/Breadcrumb.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const articles = await getCollection("articles");
+  const articles = (await getCollection("articles")).sort(
+    (a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()
+  );
   return paginate(articles, { pageSize: 3 });
 }
 
@@ -19,27 +21,37 @@ const { page } = Astro.props;
 ---
 
 <Base>
+  <Fragment slot="head">
+    <title>Blog — Jacob Roling</title>
+  </Fragment>
   <main id="main" class="container pt-24 typography">
     <Breadcrumb />
     <h1 id="blog">Blog</h1>
+    <nav aria-label="articles by tag">
+      <p id="articles-by-tag">Articles by tag:</p>
+      <ul class="flex gap-1 flex-wrap" role="list">
+        {
+          tags.map((tag) => (
+            <li>
+              <a class="button" href={`/blog/tag/${slugify(tag)}/page/1`}>
+                {tag}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
     <ul role="list">
       {
-        tags.map((tag) => (
-          <li class="inline">
-            <a href={`/blog/tag/${slugify(tag)}/page/1`} class="badge">
-              {tag}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <ul role="list">
-      {
-        page.data.map(({ slug, data: { title } }) => (
-          <li>
+        page.data.map(({ slug, data: { title, description } }) => (
+          <li class="relative">
             <a href={`/blog/${slug}`}>
-              <h2>{title}</h2>
+              <h2>
+                {title}
+                <span class="expand-to-relative" aria-hidden="true" />
+              </h2>
             </a>
+            <p class="line-clamp-3">{description}</p>
           </li>
         ))
       }

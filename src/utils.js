@@ -5,3 +5,14 @@ export function slugify(string) {
     lower: true
   })
 }
+
+export const monthFormatter = new Intl.DateTimeFormat('en-AU', {
+  year: 'numeric',
+  month: 'short'
+});
+
+export const dayFormatter = new Intl.DateTimeFormat('en-AU', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+});

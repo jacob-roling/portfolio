@@ -66,7 +66,7 @@ h1, h2, h3, hgroup > p {
 
 .typography {
   a {
-    text-decoration-color: var(--color-neutral-text);
+    text-decoration-color: var(--color-neutral-border-element);
     transition-property: color, text-decoration-color;
 
     &:hover {
