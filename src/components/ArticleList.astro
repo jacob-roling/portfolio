@@ -1,0 +1,23 @@
+---
+import { dayFormatter } from '#utils';
+import type { HTMLAttributes } from 'astro/types';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props extends HTMLAttributes<'ul'> {
+  articles: CollectionEntry<'articles'>[];
+  HeadingTag: string;
+}
+
+const { articles, HeadingTag, ...attributes} = Astro.props;
+---
+
+<ul role="list" {...attributes}>
+  {articles.map(({slug, data: {title, description, datePublished, tags}}) => <li class="relative">
+      <a href={`/blog/${slug}`}>
+        <HeadingTag>{title}<headingTag/>
+        <span class="expand-to-relative" aria-hidden="true" />
+      </a>
+      <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: {tags.join(", ")}.</p>
+      <p class="line-clamp-3">{description}</p>
+  </li>)}
+</ul>

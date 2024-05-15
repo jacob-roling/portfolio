@@ -4,10 +4,10 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import jacobRolingImage from "#/assets/jacob-roling.webp";
 import { experience, education, skills } from "#/data";
-import { getCollection } from 'astro:content';
-import { monthFormatter } from "#utils"; 
+import { dayFormatter, monthFormatter, sortedAndFilteredArticles } from "#utils"; 
+import ArticleList from "#components/ArticleList.astro";
 
-const articles = (await getCollection('articles')).sort((a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime());
+const articles = await sortedAndFilteredArticles();
 const projects = articles.filter(({data}) => data.tags.includes("Project"));
 ---
 
@@ -17,7 +17,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     <meta name="description" content="Jacob Roling is a software engineer based in South Australia, he is an experienced web and backend developer with a high proficiency in HTML, JavaScript, CSS, Rust, Go and accessibility.">
   </Fragment>
 
-  <main class="container typography text-[1.125rem] pt-24 print:pt-0">
+  <main class="container typography pt-24 print:pt-0">
     <div class="flex gap-8">
       <div class="grow">
         <h1 id="jacob-roling" class="print:text-[2rem]">Jacob Roling</h1>
@@ -119,14 +119,6 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
       </article>)}
     </div>
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
-    <div class="print:hidden">
-      {articles.slice(0, 3).map(({slug, data: {title, description}}) => <div class="relative">
-          <a href={`/blog/${slug}`}>
-            <h3>{title}</h3>
-              <span class="expand-to-relative" aria-hidden="true" />
-          </a>
-          <p class="line-clamp-3">{description}</p>
-      </div>)}
-    </div>
+    <ArticleList class="print:hidden" articles={articles.slice(0, 3)} HeadingTag="h3" />
   </main>
 </Base>

@@ -1,0 +1,36 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = {
+  page: Page<CollectionEntry<'articles'>>
+}
+
+const { page } = Astro.props;
+---
+
+<nav aria-label="pagination">
+  <ul role="list">
+    {
+      page.url.prev ? (
+        <li>
+          <a href={page.url.prev}>
+            Previous <span class="sr-only">page</span>
+          </a>
+        </li>
+      ) : null
+    }
+    <li>
+      <a href="#" aria-current="page">{page.currentPage}</a>
+    </li>
+    {
+      page.url.next ? (
+        <li>
+          <a href={page.url.next}>
+            Next <span class="sr-only">page</span>
+          </a>
+        </li>
+      ) : null
+    }
+  </ul>
+</nav>

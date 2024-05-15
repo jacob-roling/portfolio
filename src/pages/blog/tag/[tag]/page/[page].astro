@@ -1,11 +1,15 @@
 ---
 import Base from "#layouts/Base.astro";
-import { getCollection } from "astro:content";
-import { slugify } from "#utils";
+import { slugify, sortedAndFilteredArticles } from "#utils";
 import Breadcrumb from "#components/Breadcrumb.astro";
+import ArticleList from "#components/ArticleList.astro";
+import Pagination from "#components/Pagination.astro";
+import type { Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { pageSize } from "#data";
 
 export async function getStaticPaths({ paginate }) {
-  const articles = await getCollection("articles");
+  const articles = await sortedAndFilteredArticles();
   const tags = Array.from(
     new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
   );
@@ -15,16 +19,35 @@ export async function getStaticPaths({ paginate }) {
     const filteredArticles = articles.filter((article) =>
       article.data.tags.map(slugify).includes(tag)
     );
-    return paginate(filteredArticles, { params: { tag }, pageSize: 3 });
+    return paginate(filteredArticles, { params: { tag }, pageSize });
   });
 }
 
-const articles = await getCollection("articles");
+const articles = await sortedAndFilteredArticles();
+
+const { tag } = Astro.params;
 
 const tags = Array.from(
   new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
 );
 
-const { tag } = Astro.params;
+type Props = {
+  page: Page<CollectionEntry<'articles'>>
+}
+
 const { page } = Astro.props;
 ---
+
+<Base>
+  <Fragment slot="head">
+    <title>Articles tagged '{tag}' — Jacob Roling</title>
+  </Fragment>
+
+  <main id="main" class="container typography pt-24">
+    <Breadcrumb />
+    <h1>Articles tagged '{tag}'</h1>
+    <p>Articles by tag: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
+    <ArticleList articles={page.data} HeadingTag="h2" />
+    <Pagination {page} />
+  </main>
+</Base>

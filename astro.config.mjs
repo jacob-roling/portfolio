@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import icon from "astro-icon";
 import sitemap from "@astrojs/sitemap";
 // import tailwindcss from '@tailwindcss/vite';
@@ -10,27 +10,30 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'hybrid',
+  output: "hybrid",
   site: "https://jacobroling.dev",
-  trailingSlash: 'never',
+  trailingSlash: "never",
   devToolbar: {
-    enabled: false
+    enabled: false,
   },
   vite: {
     // plugins: [tailwindcss()]
   },
   integrations: [
-    icon(), 
+    icon(),
     partytown(),
-    sitemap(), 
-    playformInline(), 
-    playformCompress()
+    sitemap(),
+    playformInline(),
+    playformCompress(),
   ],
   redirects: {
-    '/blog': '/blog/page/1',
-    '/blog/page': '/blog/page/1'
+    "/blog": "/blog/page/1",
+    "/blog/page": "/blog/page/1",
+    "/blog/tag": "/blog/page/1",
+    "/blog/tag/[tag]": "/blog/tag/[tag]/page/1",
+    "/blog/tag/[tag]/page": "/blog/tag/[tag]/page/1",
   },
   adapter: node({
-    mode: "standalone"
-  })
+    mode: "standalone",
+  }),
 });

@@ -1,11 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "#layouts/Base.astro";
 import Breadcrumb from "#components/Breadcrumb.astro";
-import { dayFormatter } from "#utils";
+import { dayFormatter, slugify, sortedAndFilteredArticles } from "#utils";
 
 export async function getStaticPaths({ paginate }) {
-  const articles = await getCollection("articles");
+  const articles = await sortedAndFilteredArticles();
 
   return articles.map((post) => ({
     params: {
@@ -17,7 +16,7 @@ export async function getStaticPaths({ paginate }) {
 
 const {
   slug,
-  data: { title, description, datePublished },
+  data: { title, description, datePublished, tags },
 } = Astro.props;
 
 const { Content, headings } = await Astro.props.render();
@@ -32,11 +31,7 @@ const { Content, headings } = await Astro.props.render();
   <main id="main" class="container pt-24 typography">
     <Breadcrumb />
     <h1>{title}</h1>
-    <p>
-      <time datetime={datePublished.toISOString()}>
-        {dayFormatter.format(datePublished)}
-      </time>
-    </p>
+    <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
     <Content />
   </main>
   <aside></aside>
