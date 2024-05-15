@@ -41,15 +41,16 @@ html,
   /* 2 */
   tab-size: 4;
   /* 3 */
-  font-family: var(--default-font-family,
-      ui-sans-serif,
-      system-ui,
-      sans-serif,
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol',
-      'Noto Color Emoji'
-    );
+  font-family: var(
+    --default-font-family,
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji"
+  );
   /* 4 */
   font-feature-settings: var(--default-font-feature-settings, normal);
   /* 5 */
@@ -118,6 +119,10 @@ a {
   text-decoration: inherit;
 }
 
+dialog {
+  color: inherit;
+}
+
 /*
   Add the correct font weight in Edge and Safari.
 */
@@ -138,15 +143,17 @@ code,
 kbd,
 samp,
 pre {
-  font-family: var(--default-mono-font-family,
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      'Liberation Mono',
-      'Courier New',
-      monospace);
+  font-family: var(
+    --default-mono-font-family,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
   /* 4 */
   font-feature-settings: var(--default-mono-font-feature-settings, normal);
   /* 5 */
@@ -232,7 +239,7 @@ textarea {
   Reset the default inset border style for form controls to solid.
 */
 
-input:where(:not([type='button'], [type='reset'], [type='submit'])),
+input:where(:not([type="button"], [type="reset"], [type="submit"])),
 select,
 textarea {
   border-width: var(--border-width);
@@ -242,7 +249,7 @@ textarea {
   Correct the inability to style the border radius in iOS Safari.
 */
 button,
-input:where([type='button'], [type='reset'], [type='submit']),
+input:where([type="button"], [type="reset"], [type="submit"]),
 ::file-selector-button {
   appearance: button;
 }
@@ -300,7 +307,7 @@ summary {
   Remove list styles with list role which suggests default styling will be removed
 */
 
-[role='list'] {
+[role="list"] {
   list-style: none;
 }
 

@@ -1,0 +1,11 @@
+---
+export const partial = true;
+export const prerender = false;
+
+const data = await Astro.request.formData();
+const comment = data.get("comment");
+
+
+---
+
+<p>{comment}</p>

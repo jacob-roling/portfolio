@@ -1,0 +1,34 @@
+---
+import { OAuthApp, Octokit } from "octokit";
+export const partial = true;
+export const prerender = false;
+
+// const owner = "jacob-roling";
+// const repo = "portfolio";
+
+const oauth = new OAuthApp({
+  clientId: import.meta.env.GITHUB_CLIENT_ID, 
+  clientSecret: import.meta.env.GITHUB_CLIENT_SECRET,
+});
+
+const { authentication } = await oauth.createToken({
+  code: Astro.url.searchParams.get("code"),
+});
+
+const octokit = new Octokit({ auth: authentication.token });
+
+const { data: { login, name, avatar_url }} = await octokit.rest.users.getAuthenticated();
+
+Astro.response.headers.set("HX-Retarget", "#login");
+Astro.response.headers.set("Location", Astro.url.searchParams.get("state"));
+Astro.response.status = 302;
+---
+
+<div class="flex gap-4">
+  <img src={avatar_url} alt={`@${login}`} width="44" height="44" />
+  <form class="grid grid-cols-2 max-w-prose" action="/api/comment" method="post" hx-push-url="false" hx-target="#comments-list" hx-swap="afterbegin">
+    <label class="col-span-2" for="comment">Comment</label>
+    <textarea class="col-span-2" name="comment" id="comment" rows="4"></textarea>
+    <input class="col-span-2 button outline" type="submit" value="Post Comment"></input>
+  </form>
+</div>

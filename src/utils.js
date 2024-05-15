@@ -25,3 +25,19 @@ export async function sortedAndFilteredArticles() {
     (a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()
   );
 }
+
+export async function trycatch(promise) {
+  try {
+    return [await promise, null];
+  } catch (error) {
+    return [null, error];
+  }
+}
+
+export function importStatic(modulePath) {
+  if (import.meta.env.DEV) {
+    return import(/* @vite-ignore */ `${modulePath}`);
+  } else {
+    return import(/* @vite-ignore */ modulePath);
+  }
+}

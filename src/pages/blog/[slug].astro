@@ -28,11 +28,27 @@ const { Content, headings } = await Astro.props.render();
     <meta name="description" content={description} />
   </Fragment>
 
-  <main id="main" class="container pt-24 typography">
+  <main id="main" class="container pt-header typography">
     <Breadcrumb />
     <h1>{title}</h1>
     <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
     <Content />
+    <!-- <article>
+      <h2 id="comments">Comments</h2>
+      <h3>Leave a Comment</h3>
+      <div id="comments-list"></div>
+      <a id="login" href={`https://github.com/login/oauth/authorize?${new URLSearchParams({
+        client_id: import.meta.env.GITHUB_CLIENT_ID,
+        state: Astro.url.href
+      })}`}>Login with GitHub</a>
+    </article> -->
+    <script src="https://utteranc.es/client.js"
+        repo="jacob-roling/portfolio"
+        issue-term="pathname"
+        theme="preferred-color-scheme"
+        crossorigin="anonymous"
+        async>
+  </script>
   </main>
   <aside></aside>
 </Base>

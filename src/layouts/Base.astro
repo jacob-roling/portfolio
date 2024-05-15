@@ -1,11 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import "#/style/global.css";
+import Search from "#components/Search.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<html lang="en" class="dark">
+<html lang="en" dir="ltr" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -33,9 +34,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body hx-boost="true" hx-ext="morph, route-announcer" class="text-[1.125rem]">
     <header
-      class="z-10 print:hidden fixed container w-full top-0 bg-neutral-background-subtle py-2 border-b"
+      class="z-10 print:hidden fixed container w-full top-0 border-b bg-neutral-background-subtle"
     >
-      <nav aria-label="primary">
+      <div class="breakout container bg-warning-background-element text-warning-text-high-contrast py-1">
+        <p class="text-center">This website is currently a work in progress.</p>
+      </div>
+      <nav aria-label="primary" class="py-2">
         <ul class="flex gap-4" role="list">
           <li class="sr-only focus-within:not-sr-only">
             <a class="button" href="#main">Skip to content</a>
@@ -61,7 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <button class="button" onclick="print()">Print</button>
           </li>
           <li class="ml-auto">
-            <button class="button outline">
+            <button class="button outline" onclick="document.getElementById('search').showModal()">
               <Icon
                 class="inline"
                 name="heroicons:magnifying-glass"
@@ -94,6 +98,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </nav>
       <p class="mt-4">&copy; {new Date().getFullYear()} Jacob Roling</p>
     </footer>
+
+    <Search />
 
     <script>
       import htmx from "htmx.org";

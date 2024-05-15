@@ -30,7 +30,7 @@ const { page } = Astro.props;
   <Fragment slot="head">
     <title>Blog — Jacob Roling</title>
   </Fragment>
-  <main id="main" class="container pt-24 typography">
+  <main id="main" class="container pt-header typography">
     <Breadcrumb />
     <h1 id="blog">Blog</h1>
     <p>Articles by tag: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>

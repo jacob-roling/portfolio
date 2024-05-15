@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && pnpx pagefind --site 'dist/client'",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -21,6 +21,7 @@
     "astro": "^4.7.1",
     "htmx.org": "^1.9.12",
     "markdown-it": "^14.1.0",
+    "octokit": "^4.0.2",
     "sanitize-html": "^2.13.0",
     "sharp": "^0.33.3",
     "slugify": "^1.6.6"
@@ -30,8 +31,11 @@
     "@tailwindcss/postcss": "4.0.0-alpha.14",
     "@tailwindcss/vite": "4.0.0-alpha.14",
     "astro-icon": "^1.1.0",
+    "netlify-cli": "^17.23.5",
+    "pagefind": "^1.1.0",
     "postcss-custom-media": "^10.0.6",
     "postcss-custom-properties": "^13.3.8",
+    "sirv": "^2.0.4",
     "tailwindcss": "4.0.0-alpha.14"
   }
 }

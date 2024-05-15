@@ -8,6 +8,8 @@
 @import "@radix-ui/colors/iris-dark.css";
 @import "@radix-ui/colors/gray.css";
 @import "@radix-ui/colors/gray-dark.css";
+@import "@radix-ui/colors/amber.css";
+@import "@radix-ui/colors/amber-dark.css";
 
 @custom-media --sm (min-width: 640px);
 @custom-media --md (min-width: 768px);
@@ -32,6 +34,20 @@
   --color-primary-text-high-contrast: var(--iris-12);
   --color-primary-text-solid-contrast: #fff;
 
+  --color-warning-background: var(--amber-1);
+  --color-warning-background-subtle: var(--amber-2);
+  --color-warning-background-element: var(--amber-3);
+  --color-warning-hover: var(--amber-4);
+  --color-warning-active: var(--amber-5);
+  --color-warning-border: var(--amber-6);
+  --color-warning-border-element: var(--amber-7);
+  --color-warning-border-hover: var(--amber-8);
+  --color-warning-solid: var(--amber-9);
+  --color-warning-solid-hover: var(--amber-10);
+  --color-warning-text: var(--amber-11);
+  --color-warning-text-high-contrast: var(--amber-12);
+  --color-warning-text-solid-contrast: #000;
+
   --color-neutral-background: var(--gray-1);
   --color-neutral-background-subtle: var(--gray-2);
   --color-neutral-background-element: var(--gray-3);
@@ -45,6 +61,8 @@
   --color-neutral-text: var(--gray-11);
   --color-neutral-text-high-contrast: var(--gray-12);
   --color-neutral-text-solid-contrast: #fff;
+
+  --spacing-header: 8rem;
 }
 
 :root {
@@ -59,10 +77,12 @@
   border-color: var(--color-neutral-border);
 }
 
-h1, h2, h3, hgroup > p {
+h1,
+h2,
+h3,
+hgroup > p {
   color: var(--color-neutral-text-high-contrast);
 }
-
 
 .typography {
   a {
@@ -74,6 +94,22 @@ h1, h2, h3, hgroup > p {
       text-decoration-color: var(--color-neutral-text-high-contrast);
     }
   }
+}
+
+label {
+  color: var(--color-neutral-text-high-contrast);
+}
+
+::selection,
+mark {
+  color: var(--color-primary-text-solid-contrast);
+  background-color: var(--color-primary-solid);
+}
+
+input {
+  color: var(--color-neutral-text-high-contrast);
+  background-color: var(--color-neutral-background-element);
+  border-color: var(--color-neutral-border-element);
 }
 
 .badge {
@@ -95,15 +131,14 @@ h1, h2, h3, hgroup > p {
     border-color: var(--color-neutral-border-element);
     border-top-width: calc(var(--border-width) + 1px);
   }
-  
+
   &:hover {
     background-color: var(--color-neutral-hover);
 
-    >.badge {
+    > .badge {
       background-color: var(--color-neutral-hover);
     }
   }
-
 
   &.outline {
     border-color: var(--color-neutral-border-element);
@@ -123,4 +158,9 @@ h1, h2, h3, hgroup > p {
       background-color: var(--color-neutral-solid-hover);
     }
   }
+}
+
+.utterances {
+  margin: 0;
+  max-width: var(--width-prose);
 }
