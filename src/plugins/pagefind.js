@@ -1,18 +1,18 @@
 import sirv from "sirv";
-import { fileURLToPath } from "node:url";
+// import { fileURLToPath } from "node:url";
 import { execSync } from "child_process";
 
 /**
  *  @return {import("astro").AstroIntegration}
  */
 export default function pagefind() {
-  let outDir;
+  // let outDir;
   return {
     name: "pagefind",
     hooks: {
-      "astro:config:done": ({ config }) => {
-        outDir = fileURLToPath(config.outDir + "client");
-      },
+      // "astro:config:done": ({ config }) => {
+      //   outDir = fileURLToPath(config.outDir + "client");
+      // },
       "astro:server:setup": ({ server }) => {
         const serve = sirv(outDir, {
           dev: true,
@@ -28,7 +28,7 @@ export default function pagefind() {
         });
       },
       "astro:build:done": ({ logger }) => {
-        const cmd = `pnpx pagefind --site "${outDir}"`;
+        const cmd = `pnpx pagefind --site "./dist/client"`;
         execSync(cmd, {
           stdio: [process.stdin, process.stdout, process.stderr],
         });
