@@ -60,6 +60,7 @@ html,
   /* 7 */
   -webkit-font-smoothing: antialiased;
   /* 8 */
+  hanging-punctuation: first last;
 }
 
 /*
@@ -67,7 +68,11 @@ html,
 */
 
 body {
+  display: flex;
+  flex-direction: column;
   line-height: inherit;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /*
@@ -107,6 +112,20 @@ h6 {
   font-size: inherit;
   font-weight: inherit;
   text-wrap: balance;
+}
+
+/* Prevent orphans */
+
+p {
+  text-wrap: pretty;
+}
+
+/* Smooth scroll */
+
+@media (prefers-reduced-motion: no-preference) {
+  :has(:target) {
+    scroll-behavior: smooth;
+  }
 }
 
 /*
@@ -309,6 +328,7 @@ summary {
 
 [role="list"] {
   list-style: none;
+  margin: 0;
 }
 
 /*

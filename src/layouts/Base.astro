@@ -84,15 +84,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
 
     <footer
-      class="mt-8 container typography print:hidden bg-neutral-background-subtle py-4 border-t"
+      class="mt-auto container typography print:hidden bg-neutral-background-subtle py-4 border-t"
     >
       <nav aria-label="footer">
-        <ul class="flex gap-4 items-center" role="list">
+        <ul class="flex gap-4 items-center max-w-full" role="list">
           <li>
             <a href="/sitemap-index.xml">Sitemap</a>
           </li>
           <li>
             <a href="/rss.xml">RSS</a>
+          </li>
+          <li class="ml-auto">
+            <label for="theme-select">Theme: </label>
+            <select name="theme" id="theme-select">
+              <option value="auto">Auto</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
           </li>
         </ul>
       </nav>

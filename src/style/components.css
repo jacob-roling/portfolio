@@ -54,7 +54,7 @@
   h5,
   h6 {
     margin-block-end: 0.5em;
-    scroll-margin-block: 4em;
+    scroll-margin-block: var(--spacing-header, 4em);
   }
 
   p,
@@ -156,11 +156,6 @@ textarea {
   padding-block: 0.25em;
 }
 
-[type="text"] {
-  padding-inline: 0.5em;
-  padding-block: 0.25em;
-}
-
 .expand-to-relative {
   display: block;
   position: absolute;
@@ -222,6 +217,7 @@ fieldset {
   gap: 0.5em;
   width: max-content;
 
+  font-weight: 500;
   line-height: 1.125;
 
   padding-inline: 1em;
@@ -250,11 +246,14 @@ fieldset {
 }
 
 label {
-  font-weight: 600;
+  font-weight: 500;
   margin-block-end: 0.5em;
 }
 
-input {
+input,
+select {
+  padding-block: 0.5em;
+  padding-inline: 1em;
   border-radius: var(--border-radius);
 }
 

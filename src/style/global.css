@@ -66,6 +66,8 @@
 }
 
 :root {
+  color-scheme: light dark;
+
   --border-width: 1px;
   --border-radius: 4px;
   --border-style: solid;
@@ -75,6 +77,14 @@
   color: var(--color-neutral-text);
   background-color: var(--color-neutral-background);
   border-color: var(--color-neutral-border);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 h1,
@@ -106,7 +116,8 @@ mark {
   background-color: var(--color-primary-solid);
 }
 
-input {
+input,
+select {
   color: var(--color-neutral-text-high-contrast);
   background-color: var(--color-neutral-background-element);
   border-color: var(--color-neutral-border-element);
