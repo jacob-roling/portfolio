@@ -1,6 +1,9 @@
 # example netlify.toml
+[dev]
+  command = "pnpm astro dev"
+
 [build]
-  command = "pnpm build"
+  command = "pnpm astro build"
   functions = "netlify/functions"
   publish = "dist"
 
