@@ -3,4 +3,5 @@
 
 interface Window {
   htmx: import("htmx.org");
+  posthog: import("posthog-js");
 }

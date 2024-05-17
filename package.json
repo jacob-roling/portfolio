@@ -22,6 +22,7 @@
     "htmx.org": "^1.9.12",
     "markdown-it": "^14.1.0",
     "octokit": "^4.0.2",
+    "posthog-js": "^1.131.4",
     "sanitize-html": "^2.13.0",
     "sharp": "^0.33.3",
     "slugify": "^1.6.6"

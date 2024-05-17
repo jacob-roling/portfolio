@@ -28,7 +28,9 @@ export default defineConfig({
   integrations: [
     icon(),
     pagefind(),
-    partytown(),
+    partytown({
+      config: { debug: false },
+    }),
     sitemap(),
     playformInline(),
     playformCompress(),
