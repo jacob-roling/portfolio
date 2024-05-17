@@ -115,10 +115,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <Search />
 
     <script>
-      import posthog from 'posthog-js'
       import htmx from "htmx.org";
       window.htmx = htmx;
-      window.posthog = posthog;
     </script>
   </body>
 </html>
