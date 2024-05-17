@@ -6,7 +6,7 @@ import netlify from "@astrojs/netlify";
 import partytown from "@astrojs/partytown";
 import playformCompress from "@playform/compress";
 import playformInline from "@playform/inline";
-import node from "@astrojs/node";
+// import node from "@astrojs/node";
 import pagefind from "./src/plugins/pagefind";
 
 // https://astro.build/config
@@ -40,7 +40,5 @@ export default defineConfig({
     "/blog/tag/[tag]": "/blog/tag/[tag]/page/1",
     "/blog/tag/[tag]/page": "/blog/tag/[tag]/page/1",
   },
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: netlify(),
 });
