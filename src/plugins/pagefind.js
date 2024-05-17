@@ -28,7 +28,7 @@ export default function pagefind() {
         });
       },
       "astro:build:done": ({ logger }) => {
-        const cmd = `pnpx pagefind --site "./dist/client"`;
+        const cmd = `pnpm pagefind --site "./dist/client"`;
         execSync(cmd, {
           stdio: [process.stdin, process.stdout, process.stderr],
         });
