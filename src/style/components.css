@@ -255,10 +255,14 @@ label {
   margin-block-end: 0.5em;
 }
 
-input,
-select {
+input {
   padding-block: 0.5em;
   padding-inline: 1em;
+  border-radius: var(--border-radius);
+}
+
+select {
+  padding: 0.5em;
   border-radius: var(--border-radius);
 }
 
