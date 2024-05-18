@@ -99,9 +99,25 @@ hgroup > p {
     text-decoration-color: var(--color-neutral-border-element);
     transition-property: color, text-decoration-color;
 
-    &:hover {
+    &:hover,
+    &[aria-current="page"] {
       color: var(--color-neutral-text-high-contrast);
       text-decoration-color: var(--color-neutral-text-high-contrast);
+    }
+  }
+
+  thead {
+    background-color: var(--color-neutral-background-element);
+    color: var(--color-neutral-text-high-contrast);
+  }
+
+  tbody {
+    tr {
+      background-color: var(--color-neutral-background-subtle);
+
+      /* &:nth-child(even) {
+        background-color: var(--color-neutral-background-subtle);
+      } */
     }
   }
 }

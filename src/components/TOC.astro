@@ -1,0 +1,44 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+type Props = {
+  depth: number
+  headings: MarkdownHeading[]
+}
+
+const { depth = 2, headings } = Astro.props;
+
+const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumulator, heading) => {
+  if (heading.depth > depth) {
+    accumulator[accumulator.length - 1].children.push(heading);
+  } else {
+    accumulator.push({ heading, children: [] });
+  }
+  return accumulator;
+}, [{ heading: headings[0], children: [] }]) : [];
+---
+
+{ currentHeadings.length > 0 ?
+  <ol role="list" class="toc-list">
+    { currentHeadings.map(({ heading: { slug, text }, children }) => <li>
+      <a href={`#${slug}`}>
+        {text}
+      </a>
+      { children.length > 0 ? <Astro.self depth={depth + 1} headings={children} /> : null }
+    </li>)}
+  </ol>
+: null }
+
+<style>
+  .toc-list {
+    a {
+      &:hover {
+        color: var(--color-neutral-text-high-contrast);
+      }
+    }
+
+    .toc-list {
+      padding-inline-start: 1em;
+    }
+  }
+</style>

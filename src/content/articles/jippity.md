@@ -7,3 +7,5 @@ tags:
 ---
 
 JippiTTY is a Teletypewriter (TTY) for ChatGPT hence the name, a combination of 'Jippi' for 'GP' in 'ChatGPT' and 'tty', the abbreviation of Teletypewriter.
+
+Repository: [jacob-roling/jippitty](https://github.com/jacob-roling/jippitty)

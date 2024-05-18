@@ -12,9 +12,6 @@
   border-width: var(--border-width);
   border-color: transparent;
 
-  transition-duration: var(--default-transition-duration);
-  transition-timing-function: var(--default-transition-timing-function);
-
   @media print {
     padding: 0;
     font-size: inherit;
@@ -59,7 +56,9 @@
 
   p,
   ul,
-  ol {
+  ol,
+  hr,
+  table {
     margin-block-end: 1em;
   }
 
@@ -68,9 +67,6 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.125em;
-
-    transition-duration: var(--default-transition-duration);
-    transition-timing-function: var(--default-transition-timing-function);
   }
 
   ul,
@@ -103,6 +99,18 @@
   ol,
   ul {
     max-width: var(--width-prose);
+  }
+
+  table {
+    width: 100%;
+    border-radius: var(--border-radius);
+    text-align: left;
+  }
+
+  td,
+  th {
+    padding: 0.5em;
+    border-width: var(--border-width);
   }
 }
 
@@ -227,9 +235,6 @@ fieldset {
   border-width: var(--border-width);
   border-color: transparent;
 
-  transition-duration: var(--default-transition-duration);
-  transition-timing-function: var(--default-transition-timing-function);
-
   &.icon {
     padding-inline: 0.5em;
   }
@@ -261,4 +266,11 @@ textarea {
   margin-block-end: 1em;
   border-radius: var(--border-radius);
   padding: 0.5em;
+}
+
+a,
+.button,
+.badge {
+  transition-duration: var(--default-transition-duration);
+  transition-timing-function: var(--default-transition-timing-function);
 }

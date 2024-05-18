@@ -62,9 +62,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
               <option value="dark">Dark</option>
             </select>
           </li> -->
-          <li>
+          <!-- <li>
             <button class="button" onclick="print()">Print</button>
-          </li>
+          </li> -->
           <li class="ml-auto">
             <button class="button outline" onclick="document.getElementById('search').showModal()">
               <Icon
@@ -85,7 +85,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
 
     <footer
-      class="mt-auto container typography print:hidden bg-neutral-background-subtle py-4 border-t"
+      class="container typography print:hidden bg-neutral-background-subtle py-4 border-t"
     >
       <nav aria-label="footer">
         <ul class="flex gap-4 items-center max-w-full" role="list">

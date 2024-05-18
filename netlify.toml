@@ -1,6 +1,7 @@
 # example netlify.toml
 [dev]
   command = "pnpm astro dev"
+  autoLaunch = false
 
 [build]
   command = "pnpm astro build"
