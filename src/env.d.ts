@@ -4,4 +4,5 @@
 interface Window {
   htmx: import("htmx.org");
   posthog: import("posthog-js");
+  Stimulus: import("@hotwired/stimulus").Application;
 }

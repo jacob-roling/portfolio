@@ -6,15 +6,13 @@ import Search from "#components/Search.astro";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<html lang="en" dir="ltr" class="dark">
+<html lang="en" dir="ltr" data-theme="auto">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL.href.slice(0, -1)} />
-    <!-- htmx Extensions -->
-    <!-- <script is:inline src="https://unpkg.com/htmx-route-announcer/index.js" defer></script> -->
     <!-- RSS -->
     <link
       rel="alternate"
@@ -37,7 +35,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <header
       class="z-10 print:hidden fixed container w-full top-0 border-b bg-neutral-background-subtle"
     >
-      <div class="breakout container bg-warning-background-element text-warning-text-high-contrast py-1">
+      <div class="breakout container bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
         <p class="text-center"><span aria-hidden="true">🚧</span> This website is currently under construction. <span aria-hidden="true">🚧</span></p>
       </div>
       <nav aria-label="primary" class="py-2">
@@ -54,19 +52,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <li>
             <a class="button" href="/#projects">Projects</a>
           </li>
-          <!-- <li>
-            <label for="theme-switcher">Theme</label>
-            <select name="theme-switcher" id="theme-switcher">
-              <option value="auto">Auto</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-            </select>
-          </li> -->
-          <!-- <li>
-            <button class="button" onclick="print()">Print</button>
-          </li> -->
           <li class="ml-auto">
-            <button class="button outline" onclick="document.getElementById('search').showModal()">
+            <button class="button outlined" onclick="document.getElementById('search').showModal()">
               <Icon
                 class="inline"
                 name="heroicons:magnifying-glass"
@@ -97,7 +84,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </li>
           <li class="ml-auto">
             <label for="theme-select">Theme: </label>
-            <select name="theme" id="theme-select">
+            <select data-controller="theme" name="theme" id="theme-select">
               <option value="auto">Auto</option>
               <option value="light">Light</option>
               <option value="dark">Dark</option>
@@ -112,7 +99,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <script>
       import htmx from "htmx.org";
+      import { Application } from "@hotwired/stimulus";
+      import ThemeController from "#controllers/theme_controller";
+      import RouteAnnouncer from "htmx-route-announcer";
+      
+      import("idiomorph/dist/idiomorph-ext.js");
+
+
       window.htmx = htmx;
+      window.Stimulus = Application.start();
+
+      window.Stimulus.register("theme", ThemeController);
     </script>
   </body>
 </html>

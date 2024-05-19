@@ -1,15 +1,13 @@
-@layer base, components, utilities, theme;
-@import "./preflight.css" layer(base);
-@import "./utilities.css" layer(utilities);
-@import "./components.css" layer(components);
+@layer preflight, components, utilities, theme;
+
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
-@import "@radix-ui/colors/iris.css";
-@import "@radix-ui/colors/iris-dark.css";
-@import "@radix-ui/colors/gray.css";
-@import "@radix-ui/colors/gray-dark.css";
-@import "@radix-ui/colors/amber.css";
-@import "@radix-ui/colors/amber-dark.css";
+
+@import "@jroling/cleancss/dist/preflight.css" layer(preflight);
+@import "@jroling/cleancss/dist/components.css" layer(components);
+@import "@jroling/cleancss/dist/utilities.css" layer(utilities);
+
+@import "./colors.css";
 
 @custom-media --sm (min-width: 640px);
 @custom-media --md (min-width: 768px);
@@ -18,55 +16,17 @@
 @custom-media --2xl (min-width: 1536px);
 
 @theme {
-  --color-*: initial;
-
-  --color-primary-background: var(--iris-1);
-  --color-primary-background-subtle: var(--iris-2);
-  --color-primary-background-element: var(--iris-3);
-  --color-primary-hover: var(--iris-4);
-  --color-primary-active: var(--iris-5);
-  --color-primary-border: var(--iris-6);
-  --color-primary-border-element: var(--iris-7);
-  --color-primary-border-hover: var(--iris-8);
-  --color-primary-solid: var(--iris-9);
-  --color-primary-solid-hover: var(--iris-10);
-  --color-primary-text: var(--iris-11);
-  --color-primary-text-high-contrast: var(--iris-12);
-  --color-primary-text-solid-contrast: #fff;
-
-  --color-warning-background: var(--amber-1);
-  --color-warning-background-subtle: var(--amber-2);
-  --color-warning-background-element: var(--amber-3);
-  --color-warning-hover: var(--amber-4);
-  --color-warning-active: var(--amber-5);
-  --color-warning-border: var(--amber-6);
-  --color-warning-border-element: var(--amber-7);
-  --color-warning-border-hover: var(--amber-8);
-  --color-warning-solid: var(--amber-9);
-  --color-warning-solid-hover: var(--amber-10);
-  --color-warning-text: var(--amber-11);
-  --color-warning-text-high-contrast: var(--amber-12);
-  --color-warning-text-solid-contrast: #000;
-
-  --color-neutral-background: var(--gray-1);
-  --color-neutral-background-subtle: var(--gray-2);
-  --color-neutral-background-element: var(--gray-3);
-  --color-neutral-hover: var(--gray-4);
-  --color-neutral-active: var(--gray-5);
-  --color-neutral-border: var(--gray-6);
-  --color-neutral-border-element: var(--gray-7);
-  --color-neutral-border-hover: var(--gray-8);
-  --color-neutral-solid: var(--gray-9);
-  --color-neutral-solid-hover: var(--gray-10);
-  --color-neutral-text: var(--gray-11);
-  --color-neutral-text-high-contrast: var(--gray-12);
-  --color-neutral-text-solid-contrast: #fff;
-
   --spacing-header: 8rem;
 }
 
 :root {
   color-scheme: light dark;
+
+  --outline-width: 2px;
+  --outline-color: var(--color-primary-solid);
+  --outline-style: solid;
+
+  --tw-outline-style: var(--outline-style);
 
   --border-width: 1px;
   --border-radius: 4px;
@@ -79,12 +39,8 @@
   border-color: var(--color-neutral-border);
 }
 
-[data-theme="light"] {
-  color-scheme: light;
-}
-
-[data-theme="dark"] {
-  color-scheme: dark;
+.outline {
+  outline-color: var(--color-primary-solid);
 }
 
 h1,
@@ -97,7 +53,6 @@ hgroup > p {
 .typography {
   a {
     text-decoration-color: var(--color-neutral-border-element);
-    transition-property: color, text-decoration-color;
 
     &:hover,
     &[aria-current="page"] {
@@ -152,7 +107,6 @@ select {
 
 .button {
   color: var(--color-neutral-text-high-contrast);
-  transition-property: color, background-color, border-color, box-shadow;
 
   > .badge {
     border-color: var(--color-neutral-border-element);
@@ -167,7 +121,7 @@ select {
     }
   }
 
-  &.outline {
+  &.outlined {
     border-color: var(--color-neutral-border-element);
 
     &:hover {
