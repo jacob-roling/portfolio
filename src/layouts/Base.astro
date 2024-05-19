@@ -33,12 +33,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body hx-boost="true" hx-ext="morph, route-announcer" class="text-[1.125rem]">
     <header
-      class="z-10 print:hidden fixed container w-full top-0 border-b bg-neutral-background-subtle"
+      class="z-10 print:hidden fixed w-full top-0 border-b bg-neutral-background-subtle"
     >
-      <div class="breakout container bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
-        <p class="text-center"><span aria-hidden="true">🚧</span> This website is currently under construction. <span aria-hidden="true">🚧</span></p>
-      </div>
-      <nav aria-label="primary" class="py-2">
+      <dialog id="banner-dialog" class="static w-full" open>
+        <div class="flex items-center px-4 bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
+          <p class="text-center grow"><span aria-hidden="true">🚧</span> This website is currently under construction. <span aria-hidden="true">🚧</span></p>
+          <button class="button icon warning outlined" onclick="document.getElementById('banner-dialog').close()">
+            <Icon name="heroicons:x-mark" aria-hidden="true" />
+            <span class="sr-only">
+              Close banner message
+            </span>
+          </button>
+        </div>
+      </dialog>
+      <nav class="container py-2" aria-label="primary" class="py-2">
         <ul class="flex gap-4" role="list">
           <li class="sr-only focus-within:not-sr-only">
             <a class="button" href="#main">Skip to content</a>
@@ -103,12 +111,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import ThemeController from "#controllers/theme_controller";
       import RouteAnnouncer from "htmx-route-announcer";
       
-      import("idiomorph/dist/idiomorph-ext.js");
-
-
       window.htmx = htmx;
+      window.htmx.defineExtension("route-announcer", RouteAnnouncer);
+      
+      import("idiomorph/dist/idiomorph-ext.js");
+      
       window.Stimulus = Application.start();
-
       window.Stimulus.register("theme", ThemeController);
     </script>
   </body>

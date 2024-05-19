@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import jacobRolingImage from "#/assets/jacob-roling.webp";
 import { experience, education, skills } from "#/data";
-import { dayFormatter, monthFormatter, sortedAndFilteredArticles } from "#utils"; 
+import { monthFormatter, sortedAndFilteredArticles } from "#utils"; 
 import ArticleList from "#components/ArticleList.astro";
 
 const articles = await sortedAndFilteredArticles();
@@ -17,7 +17,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     <meta name="description" content="Jacob Roling is a software engineer based in South Australia, he is an experienced web and backend developer with a high proficiency in HTML, JavaScript, CSS, Rust, Go and accessibility.">
   </Fragment>
 
-  <main class="container typography pt-header print:pt-0">
+  <main id="main" class="container typography pt-header print:pt-0">
     <div class="flex gap-8">
       <div class="grow">
         <h1 id="jacob-roling" class="print:text-[2rem]">Jacob Roling</h1>
@@ -28,7 +28,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
           <li class="hidden print:list-item">
             <Icon class="inline" name="heroicons:globe-alt" aria-hidden="true" />
             <span class="sr-only">My website is </span>
-            <a href={Astro.site}>{Astro.site}</a>
+            <a href={Astro.site.href.slice(0, -1)}>{Astro.site.href.slice(0, -1)}</a>
           </li>
           <li>
             <Icon class="inline" name="heroicons:map-pin" aria-hidden="true" />
@@ -36,6 +36,11 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
             Adelaide, South Australia<span class="sr-only">.</span>
           </li>
         </ul>
+        <button class="print:hidden button primary solid" onclick="print()">
+          <Icon class="inline" name="heroicons:printer" aria-hidden="true" />
+          Print
+          <span class="sr-only"> page</span>
+        </button>
       </div>
       <div class="hidden md:block print:block print:order-first">
         <Image
@@ -48,12 +53,11 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     </div>
     <h2 id="about">About Me</h2>
     <p>
-      Hi, I have been teaching myself to code since I was 12 and for the past 6
+      Hi, I have been teaching myself to code since I was 12 and for the past {new Date().getFullYear() - 2018}
       years, focused heavily on full-stack software engineering. My strength
       lies in learning quickly and focusing on fundamentals so I may apply my
-      knowledge to a variety of subjects. My ambition is to use my experience to
-      create value by solving problems with solutions that are simple, reliable
-      and efficient as possible.
+      knowledge to a variety of subjects. My ambition is to continue to create simple, reliable
+      and efficient solutions to software problems.
     </p>
     <h2 id="skills">Skills</h2>
     <ul class="print:hidden flex gap-1 flex-wrap" role="list">{skills.map(skill => <li class="badge">

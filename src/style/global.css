@@ -97,6 +97,10 @@ select {
 .badge {
   color: var(--color-neutral-text-high-contrast);
   background-color: var(--color-neutral-background-element);
+
+  &:has(kbd) {
+    border-top-width: calc(var(--border-width) + 1px);
+  }
 }
 
 .container {
@@ -110,7 +114,6 @@ select {
 
   > .badge {
     border-color: var(--color-neutral-border-element);
-    border-top-width: calc(var(--border-width) + 1px);
   }
 
   &:hover {
@@ -137,6 +140,29 @@ select {
 
     &:hover {
       background-color: var(--color-neutral-solid-hover);
+    }
+  }
+
+  &.primary {
+    &.solid {
+      background-color: var(--color-primary-solid);
+      border-color: var(--color-primary-solid);
+      color: var(--color-primary-text-solid-contrast);
+
+      &:hover {
+        background-color: var(--color-primary-solid-hover);
+      }
+    }
+  }
+
+  &.warning {
+    &.outlined {
+      border-color: var(--color-warning-border-element);
+
+      &:hover {
+        background-color: var(--color-warning-hover);
+        border-color: var(--color-warning-border-hover);
+      }
     }
   }
 }
