@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-export default class ThemeController extends Controller {
+export default class extends Controller {
   connect() {
     const theme = localStorage.getItem("theme");
 

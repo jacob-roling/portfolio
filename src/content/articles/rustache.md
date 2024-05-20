@@ -1,5 +1,4 @@
 ---
-draft: true
 title: Rustache
 description: Rustache is a fast, simple and fully spec compliant implementation of the Mustache template engine in Rust.
 datePublished: 2024-01-06
@@ -8,3 +7,5 @@ tags:
 ---
 
 Rustache is a fast, simple and fully spec compliant implementation of the Mustache template engine in Rust.
+
+Repository: [jacob-roling/rustache](https://github.com/jacob-roling/rustache)

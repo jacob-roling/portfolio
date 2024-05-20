@@ -22,11 +22,16 @@
 :root {
   color-scheme: light dark;
 
+  accent-color: var(--color-primary-solid);
+
   --outline-width: 2px;
   --outline-color: var(--color-primary-solid);
   --outline-style: solid;
 
   --tw-outline-style: var(--outline-style);
+
+  --default-font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova",
+    "Nimbus Sans", Arial, sans-serif;
 
   --border-width: 1px;
   --border-radius: 4px;

@@ -2,8 +2,8 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<dialog id="search" hx-boost="false" class="m-auto mt-header max-w-prose w-full rounded bg-neutral-background-subtle border p-8 backdrop:bg-neutral-text/5 backdrop:backdrop-blur typography">
-  <form class="absolute top-2 right-2" method="dialog">
+<dialog data-pagefind-target="dialog" class="m-auto mt-header max-w-prose w-full rounded bg-neutral-background-subtle border p-8 backdrop:bg-neutral-text/5 backdrop:backdrop-blur typography">
+  <form class="absolute top-2 right-2" method="dialog" hx-boost="false">
     <button class="button icon outlined" type="submit">
       <Icon name="heroicons:x-mark" aria-hidden="true" />
       <span class="sr-only">
@@ -17,85 +17,14 @@ import { Icon } from "astro-icon/components";
         Search
       </h2>
     </label>
-    <input id="search-query" name="query" type="text" placeholder="Search for pages, articles, tags, anything..." autocomplete="off" autofocus>
+    <input data-pagefind-target="input" name="query" type="text" placeholder="Search for pages, articles, tags, anything..." autocomplete="off" autofocus>
   </div>
-  <template id="search-result-placeholder-template"><li class="mt-4">
+  <template data-pagefind-target="placeholder">
+    <li class="mt-4">
       <div class="inline-block w-1/3 animate-pulse h-[1.5em] bg-neutral-text rounded"></div>
       <div class="inline-block w-full animate-pulse h-[1em] bg-neutral-text rounded"></div>
       <div class="inline-block w-full animate-pulse h-[1em] bg-neutral-text rounded"></div>
-    </li></template>
-  <ul id="search-results-list" role="list" class="mt-8 overflow-y-scroll max-h-[50vh]" tabindex="-1"></ul>
+    </li>
+  </template>
+  <ul data-pagefind-target="results" role="list" class="mt-8 overflow-y-scroll max-h-[50vh]" tabindex="-1"></ul>
 </dialog>
-
-<script>
-  import { importStatic } from "#utils";
-
-  async function init() {
-    const pagefind = await importStatic("/pagefind/pagefind.js");
-    pagefind.init();
-  
-    let debounce;
-    
-    window.addEventListener("keydown", event => {
-      if (event.ctrlKey && event.key === 'k') {
-        event.preventDefault();
-        // @ts-ignore
-        document.getElementById("search").showModal();
-      }
-    });
-
-    const resultsList = document.getElementById("search-results-list");
-    const placeholderTemplate = document.getElementById("search-result-placeholder-template");
-
-    document.getElementById("search-query").addEventListener("keydown", (event) => {
-      console.log(event);
-
-      if (event.code == "Tab") {
-        return;
-      }
-
-      resultsList.replaceChildren();
-      clearTimeout(debounce);
-      debounce = setTimeout(async () => {
-        // @ts-ignore
-        const search = await pagefind.search(event.target.value);
-        const children = search.results.map(() => {
-          // @ts-ignore
-          const clonedFragment = placeholderTemplate.content.cloneNode(true);
-          const child = document.createElement('li');
-          resultsList.appendChild(child);
-          while (clonedFragment.firstChild) {
-            child.appendChild(clonedFragment.firstChild);
-          }
-          return child;
-        });
-
-        search.results.map((result, i) => result.data().then(({ url, meta: { title }, excerpt }) => {
-          const item = document.createElement("li");
-          item.setAttribute("class", "relative");
-          const href = document.createElement("a");
-          href.setAttribute("href", url.length > 1 ? url.slice(0, -1) : url);
-          const heading = document.createElement("h3");
-          heading.textContent = title;
-          const span = document.createElement("span");
-          span.setAttribute("class", "expand-to-relative");
-          span.setAttribute("aria-hidden", "true");
-          heading.appendChild(span);
-          href.appendChild(heading);
-          item.appendChild(href);
-          const p = document.createElement("p");
-          p.innerHTML = excerpt;
-          item.appendChild(p);
-          resultsList.replaceChild(item, children[i]);
-        }));
-      }, 250);
-    })
-  };
-
-  document.addEventListener("astro:page-load", init);
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
-  }
-</script>

@@ -31,7 +31,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot name="head" />
     <!-- Generated -->
   </head>
-  <body class="text-[1.125rem]" hx-boost="true" hx-ext="morph, route-announcer">
+  <body class="text-[1.125rem]" data-controller="pagefind" hx-boost="true" hx-ext="morph, route-announcer">
     <header
       id='header'
       class="z-10 print:hidden fixed w-full top-0 border-b bg-neutral-background-subtle"
@@ -63,7 +63,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <a class="button" href="/#projects">Projects</a>
           </li>
           <li class="ml-auto">
-            <button class="button outlined" onclick="document.getElementById('search').showModal()">
+            <button class="button outlined" data-action="pagefind#showModal">
               <Icon
                 class="inline"
                 name="heroicons:magnifying-glass"
@@ -112,14 +112,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import { Application } from "@hotwired/stimulus";
       import ThemeController from "#controllers/theme_controller";
       import RouteAnnouncer from "htmx-route-announcer";
-      
+      import PagefindController from "#controllers/pagefind_controller";
+
       window.htmx = htmx;
       window.htmx.defineExtension("route-announcer", RouteAnnouncer);
-      
-      import("idiomorph/dist/idiomorph-ext.js");
-      
+     
+      await import("idiomorph/dist/idiomorph-ext.js");
+
+      if (import.meta.env.DEV) {
+        // htmx.logAll();
+        htmx.config.globalViewTransitions = true;
+      } else {
+        htmx.config.historyEnabled = false;
+      }
+     
+
       window.Stimulus = Application.start();
       window.Stimulus.register("theme", ThemeController);
+      window.Stimulus.register("pagefind", PagefindController);
     </script>
   </body>
 </html>
