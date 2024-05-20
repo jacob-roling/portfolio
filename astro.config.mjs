@@ -8,7 +8,9 @@ import playformCompress from "@playform/compress";
 import playformInline from "@playform/inline";
 // import node from "@astrojs/node";
 import pagefind from "./src/plugins/pagefind";
-import rehypeWrap from "rehype-wrap";
+// import rehypeWrap from "rehype-wrap";
+import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
+import remarkEmoji from "remark-emoji";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,17 +20,10 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-  // markdown: {
-  //   rehypePlugins: [
-  //     [
-  //       rehypeWrap,
-  //       {
-  //         selector: "table",
-  //         wrapper: "div.table",
-  //       },
-  //     ],
-  //   ],
-  // },
+  markdown: {
+    remarkPlugins: [remarkEmoji],
+    rehypePlugins: [rehypeAccessibleEmojis],
+  },
   vite: {
     // plugins: [tailwindcss()]
     build: {
@@ -41,7 +36,7 @@ export default defineConfig({
     icon(),
     pagefind(),
     partytown({
-      config: { debug: false },
+      config: { debug: import.meta.env.DEV },
     }),
     sitemap(),
     playformInline(),

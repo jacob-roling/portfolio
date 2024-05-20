@@ -24,7 +24,9 @@
     "idiomorph": "^0.3.0",
     "markdown-it": "^14.1.0",
     "octokit": "^4.0.2",
+    "rehype-accessible-emojis": "^0.3.2",
     "rehype-wrap": "^1.1.0",
+    "remark-emoji": "^4.0.1",
     "sanitize-html": "^2.13.0",
     "sharp": "^0.33.3",
     "slugify": "^1.6.6"
