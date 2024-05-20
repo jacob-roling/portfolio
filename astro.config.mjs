@@ -45,7 +45,7 @@ export default defineConfig({
     }),
     sitemap(),
     playformInline(),
-    playformCompress(),
+    // playformCompress(),
   ],
   redirects: {
     "/blog": "/blog/page/1",
