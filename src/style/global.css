@@ -16,11 +16,13 @@
 @custom-media --2xl (min-width: 1536px);
 
 @theme {
-  --spacing-header: 8rem;
+  --spacing-header: var(--spacing-header);
 }
 
 :root {
   color-scheme: light dark;
+
+  --spacing-header: 8rem;
 
   accent-color: var(--color-primary-solid);
 
@@ -175,4 +177,11 @@ select {
 .utterances {
   margin: 0;
   max-width: var(--width-prose);
+}
+
+.astro-code {
+  padding: 1em;
+  border-radius: var(--border-radius);
+  border-width: var(--border-width);
+  margin-block-end: 1em;
 }

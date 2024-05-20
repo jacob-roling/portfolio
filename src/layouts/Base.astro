@@ -20,6 +20,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       title="Jacob Roling"
       href={`${Astro.site}rss.xml`}
     />
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- Partytown -->
@@ -113,11 +115,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import ThemeController from "#controllers/theme_controller";
       import RouteAnnouncer from "htmx-route-announcer";
       import PagefindController from "#controllers/pagefind_controller";
+      import { recalculateHeaderSpacing } from "#utils";
 
       window.htmx = htmx;
       window.htmx.defineExtension("route-announcer", RouteAnnouncer);
      
       await import("idiomorph/dist/idiomorph-ext.js");
+
+      recalculateHeaderSpacing();
 
       if (import.meta.env.DEV) {
         // htmx.logAll();

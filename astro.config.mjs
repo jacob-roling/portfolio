@@ -11,6 +11,8 @@ import pagefind from "./src/plugins/pagefind";
 // import rehypeWrap from "rehype-wrap";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import remarkEmoji from "remark-emoji";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,8 +23,8 @@ export default defineConfig({
     enabled: false,
   },
   markdown: {
-    remarkPlugins: [remarkEmoji],
-    rehypePlugins: [rehypeAccessibleEmojis],
+    remarkPlugins: [remarkEmoji, remarkMath],
+    rehypePlugins: [rehypeAccessibleEmojis, rehypeKatex],
   },
   vite: {
     // plugins: [tailwindcss()]

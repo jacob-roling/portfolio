@@ -19,7 +19,7 @@ const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumula
 ---
 
 { currentHeadings.length > 0 ?
-  <ol role="list" class="toc-list">
+  <ol role="list" class="toc-list hidden">
     { currentHeadings.map(({ heading: { slug, text }, children }) => <li>
       <a href={`#${slug}`}>
         {text}

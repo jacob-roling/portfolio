@@ -64,8 +64,6 @@ const myFunction = () => {
 myFunction();
 ```
 
----
-
 ## Horizontal Rule
 
 ---
@@ -112,7 +110,7 @@ Inline math equation: $E=mc^2$
 Display math equation:
 
 $$
-\int_0^\infty \frac{x^3}{e^x-1}\,dx = \frac{\pi^4}{15}
+L = \frac{1}{2} \rho v^2 S C_L
 $$
 
 ## HTML

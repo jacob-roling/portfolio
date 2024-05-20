@@ -41,3 +41,11 @@ export function importStatic(modulePath) {
     return import(/* @vite-ignore */ modulePath);
   }
 }
+
+export function recalculateHeaderSpacing() {
+  const rootStyle = getComputedStyle(document.documentElement);
+  rootStyle.setProperty(
+    "--spacing-header",
+    CSS.px(document.getElementById("header").getBoundingClientRect().height)
+  );
+}
