@@ -33,8 +33,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body class="text-[1.125rem]" hx-boost="true" hx-ext="morph, route-announcer">
     <header
+      id='header'
       class="z-10 print:hidden fixed w-full top-0 border-b bg-neutral-background-subtle"
-      im-preserve='true'
+      hx-preserve="true"
     >
       <dialog id="banner-dialog" class="static w-full" open>
         <div class="flex items-center px-4 bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
