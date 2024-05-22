@@ -31,7 +31,7 @@ const { page } = Astro.props;
     <title>Blog — Jacob Roling</title>
   </Fragment>
   <main id="main" class="container pt-header typography">
-    <Breadcrumb />
+    <Breadcrumb data-delimiter="/" />
     <h1 id="blog">Blog</h1>
     <p>Articles by tag: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
     <ArticleList articles={page.data} HeadingTag="h2" />
