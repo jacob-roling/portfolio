@@ -35,11 +35,10 @@ const { Content, headings } = await Astro.props.render();
       <aside data-controller="disclosure" class="pt-header mb-8 lg:pl-8 lg:order-last lg:sticky lg:top-header">
         <button data-disclosure-target="button" class="lg:hidden peer button outlined group" aria-expanded="false">
           On this page
-          <Icon name="heroicons:chevron-right" class="group-aria-expanded:hidden" aria-hidden="true" />
-          <Icon name="heroicons:chevron-down" class="hidden group-aria-expanded:block" aria-hidden="true" />
+          <Icon name="heroicons:chevron-right" class="group-aria-expanded:rotate-90 transition-transform" aria-hidden="true" />
         </button>
-        <p class="hidden md:inline text-neutral-text-high-contrast font-semibold">On this page</p>
-        <TOC data-disclosure-target="panel" class="mt-4 hidden peer-aria-expanded:block lg:block [&_.button]:w-full pb-4 border-b lg:pb-0 lg:border-b-0" headings={headings.filter(heading => heading.depth < 3)} />
+        <p class="hidden lg:inline text-neutral-text-high-contrast font-semibold">On this page</p>
+        <TOC data-disclosure-target="panel" class="mt-4 hidden peer-aria-expanded:block lg:block pb-4 border-b lg:pb-0 lg:border-b-0" headings={headings.filter(heading => heading.depth < 3)} />
       </aside>
       <div class="typography lg:pt-header lg:border-r lg:pr-8 ">
         <Breadcrumb />

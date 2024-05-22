@@ -75,7 +75,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 aria-hidden="true"
               />
               Search
-              <span class="badge">
+              <span class="badge kbd">
                 <kbd>Ctrl</kbd> + <kbd>k</kbd>
               </span>
             </button>
@@ -178,6 +178,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       window.Stimulus.register("theme", ThemeController);
       window.Stimulus.register("pagefind", PagefindController);
       registerComponents(window.Stimulus);
+
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      metaThemeColor.setAttribute("content", window.getComputedStyle(document.documentElement).getPropertyValue("--color-neutral-background-subtle"));
+
+      document.addEventListener("theme:switch", () => {
+        metaThemeColor.setAttribute("content", window.getComputedStyle(document.documentElement).getPropertyValue("--color-neutral-background-subtle"));
+      });
     </script>
   </body>
 </html>

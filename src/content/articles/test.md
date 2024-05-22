@@ -70,18 +70,13 @@ myFunction();
 
 ## Table
 
-| Header 1       | Header 2       | Header 3       | Header 4       | Header 5       |
-| -------------- | -------------- | -------------- | -------------- | -------------- |
-| Row 1, Cell 1  | Row 1, Cell 2  | Row 1, Cell 3  | Row 1, Cell 4  | Row 1, Cell 5  |
-| Row 2, Cell 1  | Row 2, Cell 2  | Row 2, Cell 3  | Row 2, Cell 4  | Row 2, Cell 5  |
-| Row 3, Cell 1  | Row 3, Cell 2  | Row 3, Cell 3  | Row 3, Cell 4  | Row 3, Cell 5  |
-| Row 4, Cell 1  | Row 4, Cell 2  | Row 4, Cell 3  | Row 4, Cell 4  | Row 4, Cell 5  |
-| Row 5, Cell 1  | Row 5, Cell 2  | Row 5, Cell 3  | Row 5, Cell 4  | Row 5, Cell 5  |
-| Row 6, Cell 1  | Row 6, Cell 2  | Row 6, Cell 3  | Row 6, Cell 4  | Row 6, Cell 5  |
-| Row 7, Cell 1  | Row 7, Cell 2  | Row 7, Cell 3  | Row 7, Cell 4  | Row 7, Cell 5  |
-| Row 8, Cell 1  | Row 8, Cell 2  | Row 8, Cell 3  | Row 8, Cell 4  | Row 8, Cell 5  |
-| Row 9, Cell 1  | Row 9, Cell 2  | Row 9, Cell 3  | Row 9, Cell 4  | Row 9, Cell 5  |
-| Row 10, Cell 1 | Row 10, Cell 2 | Row 10, Cell 3 | Row 10, Cell 4 | Row 10, Cell 5 |
+| Rank | Title                    | Genre                          | Year | Director             |
+| ---- | ------------------------ | ------------------------------ | ---- | -------------------- |
+| 1.   | The Shawshank Redemption | Drama                          | 1994 | Frank Darabont       |
+| 2.   | The Godfather            | Crime, Drama                   | 1972 | Francis Ford Coppola |
+| 3.   | The Dark Knight          | Action, Crime, Drama, Thriller | 2008 | Christopher Nolan    |
+| 4.   | The Godfather: Part II   | Crime, Drama                   | 1974 | Francis Ford Coppola |
+| 5.   | 12 Angry Men             | Crime, Drama                   | 1957 | Sidney Lumet         |
 
 ## Images
 

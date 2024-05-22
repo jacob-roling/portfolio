@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   connect() {
     const theme = localStorage.getItem("theme");
+    // this.metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
     if (theme) {
       document.documentElement.setAttribute("data-theme", theme);
@@ -19,5 +20,6 @@ export default class extends Controller {
       localStorage.setItem("theme", this.element.value);
     }
     document.documentElement.setAttribute("data-theme", this.element.value);
+    this.dispatch("switch", { detail: this.element.value });
   }
 }

@@ -21,7 +21,7 @@ const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumula
 
 <ol role="list" {...attributes}>
     { currentHeadings.length > 0 ? currentHeadings.map(({ heading: { slug, text }, children }) => <li>
-      <a href={`#${slug}`} class="button">
+      <a href={`#${slug}`} class="button w-full text-neutral-text hover:text-neutral-text-high-contrast font-normal">
         <span class="grow">
           {text}
         </span>

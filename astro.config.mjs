@@ -8,11 +8,19 @@ import playformCompress from "@playform/compress";
 import playformInline from "@playform/inline";
 // import node from "@astrojs/node";
 import pagefind from "./src/plugins/pagefind";
-// import rehypeWrap from "rehype-wrap";
-import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import remarkEmoji from "remark-emoji";
-import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import rehypeWrap from "rehype-wrap";
+import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
+import rehypeKatex from "rehype-katex";
+
+const rehypeWrapTable = [
+  rehypeWrap,
+  {
+    selector: "table",
+    wrapper: `div class="table-container" role="region" tabindex="0"`,
+  },
+];
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,7 +32,7 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkEmoji, remarkMath],
-    rehypePlugins: [rehypeAccessibleEmojis, rehypeKatex],
+    rehypePlugins: [rehypeWrapTable, rehypeAccessibleEmojis, rehypeKatex],
   },
   vite: {
     // plugins: [tailwindcss()]

@@ -22,7 +22,7 @@
 :root {
   color-scheme: light dark;
 
-  --spacing-header: 3.875rem;
+  --spacing-header: 3.125em;
 
   accent-color: var(--color-primary-solid);
 
@@ -36,7 +36,7 @@
     "Nimbus Sans", Arial, sans-serif;
 
   --border-width: 1px;
-  --border-radius: 4px;
+  --border-radius: 8px;
   --border-style: solid;
 
   --tw-border-style: var(--border-style);
@@ -46,147 +46,153 @@
   border-color: var(--color-neutral-border);
 }
 
-.outline {
-  outline-color: var(--color-primary-solid);
-}
-
-h1,
-h2,
-h3,
-hgroup > p {
-  color: var(--color-neutral-text-high-contrast);
-}
-
-.typography {
-  a {
-    text-decoration-color: var(--color-neutral-border-element);
-
-    &:hover,
-    &[aria-current="page"] {
-      color: var(--color-neutral-text-high-contrast);
-      text-decoration-color: var(--color-neutral-text-high-contrast);
-    }
+@layer components {
+  .outline {
+    outline-color: var(--color-primary-solid);
   }
 
-  thead {
-    background-color: var(--color-neutral-background-element);
+  h1,
+  h2,
+  h3,
+  hgroup > p {
     color: var(--color-neutral-text-high-contrast);
   }
 
-  tbody {
-    tr {
-      background-color: var(--color-neutral-background-subtle);
+  .typography {
+    a {
+      text-decoration-color: var(--color-neutral-border-element);
 
-      /* &:nth-child(even) {
-        background-color: var(--color-neutral-background-subtle);
-      } */
+      &:hover,
+      &[aria-current="page"] {
+        color: var(--color-neutral-text-high-contrast);
+        text-decoration-color: var(--color-neutral-text-high-contrast);
+      }
+    }
+
+    thead {
+      th {
+        background-color: var(--color-neutral-background-element);
+        color: var(--color-neutral-text-high-contrast);
+      }
+    }
+
+    tr {
+      td {
+        background-color: var(--color-neutral-background);
+      }
+
+      &:nth-child(even) {
+        td {
+          background-color: var(--color-neutral-background-subtle);
+        }
+      }
     }
   }
-}
 
-label {
-  color: var(--color-neutral-text-high-contrast);
-}
-
-::selection,
-mark {
-  color: var(--color-primary-text-solid-contrast);
-  background-color: var(--color-primary-solid);
-}
-
-input,
-select {
-  color: var(--color-neutral-text-high-contrast);
-  background-color: var(--color-neutral-background-element);
-  border-color: var(--color-neutral-border-element);
-}
-
-.badge {
-  color: var(--color-neutral-text-high-contrast);
-  background-color: var(--color-neutral-background-element);
-
-  &:has(kbd) {
-    border-top-width: calc(var(--border-width) + 1px);
+  label {
+    color: var(--color-neutral-text-high-contrast);
   }
-}
 
-.container {
-  @media (--xl) {
-    --_width: 1024px;
+  ::selection,
+  mark {
+    color: var(--color-primary-text-solid-contrast);
+    background-color: var(--color-primary-solid);
   }
-}
 
-.button {
-  color: var(--color-neutral-text-high-contrast);
-
-  > .badge {
+  input,
+  select {
+    color: var(--color-neutral-text-high-contrast);
+    background-color: var(--color-neutral-background-element);
     border-color: var(--color-neutral-border-element);
   }
 
-  &:hover {
-    background-color: var(--color-neutral-hover);
+  .badge {
+    color: var(--color-neutral-text-high-contrast);
+    background-color: var(--color-neutral-background-element);
+
+    &.kbd {
+      border-top-width: calc(var(--border-width) + 1px);
+    }
+  }
+
+  .container {
+    @media (--xl) {
+      --_width: 1024px;
+    }
+  }
+
+  .button {
+    color: var(--color-neutral-text-high-contrast);
 
     > .badge {
-      background-color: var(--color-neutral-hover);
+      border-color: var(--color-neutral-border-element);
     }
-  }
-
-  &.outlined {
-    border-color: var(--color-neutral-border-element);
 
     &:hover {
       background-color: var(--color-neutral-hover);
-      border-color: var(--color-neutral-border-hover);
-    }
-  }
 
-  &.solid {
-    background-color: var(--color-neutral-solid);
-    border-color: var(--color-neutral-solid);
-    color: var(--color-neutral-text-solid-contrast);
-
-    &:hover {
-      background-color: var(--color-neutral-solid-hover);
-    }
-  }
-
-  &.primary {
-    &.solid {
-      background-color: var(--color-primary-solid);
-      border-color: var(--color-primary-solid);
-      color: var(--color-primary-text-solid-contrast);
-
-      &:hover {
-        background-color: var(--color-primary-solid-hover);
+      > .badge {
+        background-color: var(--color-neutral-hover);
       }
     }
-  }
 
-  &.warning {
     &.outlined {
-      border-color: var(--color-warning-border-element);
+      border-color: var(--color-neutral-border-element);
 
       &:hover {
-        background-color: var(--color-warning-hover);
-        border-color: var(--color-warning-border-hover);
+        background-color: var(--color-neutral-hover);
+        border-color: var(--color-neutral-border-hover);
+      }
+    }
+
+    &.solid {
+      background-color: var(--color-neutral-solid);
+      border-color: var(--color-neutral-solid);
+      color: var(--color-neutral-text-solid-contrast);
+
+      &:hover {
+        background-color: var(--color-neutral-solid-hover);
+      }
+    }
+
+    &.primary {
+      &.solid {
+        background-color: var(--color-primary-solid);
+        border-color: var(--color-primary-solid);
+        color: var(--color-primary-text-solid-contrast);
+
+        &:hover {
+          background-color: var(--color-primary-solid-hover);
+        }
+      }
+    }
+
+    &.warning {
+      &.outlined {
+        border-color: var(--color-warning-border-element);
+
+        &:hover {
+          background-color: var(--color-warning-hover);
+          border-color: var(--color-warning-border-hover);
+        }
       }
     }
   }
-}
 
-.utterances {
-  margin: 0;
-  max-width: var(--width-prose);
-}
+  .utterances {
+    margin: 0;
+    max-width: var(--width-prose);
+  }
 
-.astro-code {
-  padding: 1em;
-  border-radius: var(--border-radius);
-  border-width: var(--border-width);
-  margin-block-end: 1em;
-}
+  .astro-code {
+    padding: 1em;
+    border-radius: var(--border-radius);
+    border-width: var(--border-width);
+    margin-block-end: 1em;
+  }
 
-[data-icon] {
-  font-size: 1.125em;
-  line-height: 1;
+  [data-icon] {
+    font-size: 1.125em;
+    line-height: 1;
+  }
 }
