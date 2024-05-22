@@ -3,6 +3,7 @@ import Base from "#layouts/Base.astro";
 import Breadcrumb from "#components/Breadcrumb.astro";
 import TOC from "#components/TOC.astro";
 import { dayFormatter, slugify, sortedAndFilteredArticles } from "#utils";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths({ paginate }) {
   const articles = await sortedAndFilteredArticles();
@@ -29,7 +30,15 @@ const { Content, headings } = await Astro.props.render();
     <meta name="description" content={description} />
   </Fragment>
 
-  <div class="container grow relative">
+  <div class="container">
+    <aside data-controller="disclosure" class="breakout px-4 sticky top-header py-2 md:pl-8 bg-neutral-background w-full border-b">
+      <button data-disclosure-target="button" class="peer button outlined group" aria-expanded="false">
+        On this page
+        <Icon name="heroicons:chevron-right" class="group-aria-expanded:hidden" aria-hidden="true" />
+        <Icon name="heroicons:chevron-down" class="hidden group-aria-expanded:block" aria-hidden="true" />
+      </button>
+      <TOC data-disclosure-target="panel" class="mt-4 hidden peer-aria-expanded:block list max-h-[50vh] overflow-y-scroll px-4" headings={headings.filter(heading => heading.depth < 3)} />
+    </aside>
     <div class="md:flex md:items-start">
       <main id="main" class="pt-header md:border-r md:pr-8 typography min-h-full">
         <Breadcrumb />
@@ -53,10 +62,6 @@ const { Content, headings } = await Astro.props.render();
             async>
         </script> -->
       </main>
-      <aside class="fixed top-0 pt-header md:pl-8 bg-neutral-background w-full">
-        <p>On this Page</p>
-        <TOC {headings} />
-      </aside>
     </div>
   </div>
 </Base>

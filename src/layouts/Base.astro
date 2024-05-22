@@ -36,11 +36,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <body class="text-[1.125rem]" data-controller="pagefind" hx-boost="true" hx-ext="morph, route-announcer">
     <header
       id='header'
-      class="z-10 print:hidden fixed w-full top-0 border-b bg-neutral-background-subtle"
+      class="z-10 print:hidden sticky w-full top-0 border-b bg-neutral-background-subtle"
       hx-preserve="true"
     >
       <dialog id="banner-dialog" class="static w-full" open>
-        <div class="flex items-center px-4 bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
+        <div class="flex items-center px-8 bg-warning-background-element text-warning-text-high-contrast py-1 border-b border-warning-border">
           <p class="text-center grow"><span aria-hidden="true">🚧</span> This website is currently under construction. <span aria-hidden="true">🚧</span></p>
           <button class="button icon warning outlined" onclick="document.getElementById('banner-dialog').close()">
             <Icon name="heroicons:x-mark" aria-hidden="true" />
@@ -56,15 +56,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             <a class="button" href="#main">Skip to content</a>
           </li>
           <li>
-            <a class="button" href="/">Home</a>
+            <a class="button -ml-4" href="/">Jacob Roling</a>
           </li>
-          <li>
+          <li class="hidden md:list-item">
             <a class="button" href="/blog/page/1">Blog</a>
           </li>
-          <li>
+          <li class="hidden md:list-item">
             <a class="button" href="/#projects">Projects</a>
           </li>
-          <li class="ml-auto">
+          <li class="ml-auto hidden md:list-item">
             <button class="button outlined" data-action="pagefind#showModal">
               <Icon
                 class="inline"
@@ -76,6 +76,51 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 <kbd>Ctrl</kbd> + <kbd>k</kbd>
               </span>
             </button>
+          </li>
+          <li class="ml-auto md:hidden" data-controller="disclosure">
+            <button data-disclosure-target="button" class="md:hidden button icon outlined group">
+              <Icon
+                class="group-aria-expanded:hidden"
+                name="heroicons:bars-3"
+                aria-hidden="true"
+              />
+              <Icon
+                class="hidden group-aria-expanded:block"
+                name="heroicons:x-mark"
+                aria-hidden="true"
+              />
+              <span class="sr-only">
+                Close
+              </span>
+            </button>
+            <ul data-disclosure-target="panel" class="hidden data-[expanded]:block absolute top-full left-0 w-full max-h-screen border-y bg-neutral-background-subtle py-4 px-8 [&_.button]:w-full overflow-y-scroll" role="list">
+              <li>
+                <button class="button" data-action="pagefind#showModal disclosure#close">
+                  <span class="grow">
+                    Search
+                  </span>
+                  <Icon
+                    class="inline"
+                    name="heroicons:magnifying-glass"
+                    aria-hidden="true"
+                  />
+                </button>
+              </li>
+              <li>
+                <a href="/blog/page/1" class="button" data-action="disclosure#close">
+                  <span class="grow">
+                    Blog
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="/#projects" class="button" data-action="disclosure#close">
+                  <span class="grow">
+                    Projects
+                  </span>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
@@ -116,13 +161,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import RouteAnnouncer from "htmx-route-announcer";
       import PagefindController from "#controllers/pagefind_controller";
       import { recalculateHeaderSpacing } from "#utils";
+      import { registerComponents } from "@jroling/stimui";
 
       window.htmx = htmx;
       window.htmx.defineExtension("route-announcer", RouteAnnouncer);
+      window.recalculateHeaderSpacing = recalculateHeaderSpacing;
      
       await import("idiomorph/dist/idiomorph-ext.js");
-
-      recalculateHeaderSpacing();
 
       if (import.meta.env.DEV) {
         // htmx.logAll();
@@ -135,6 +180,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       window.Stimulus = Application.start();
       window.Stimulus.register("theme", ThemeController);
       window.Stimulus.register("pagefind", PagefindController);
+      registerComponents(window.Stimulus);
     </script>
   </body>
 </html>

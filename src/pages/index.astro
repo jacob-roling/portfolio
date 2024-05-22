@@ -2,7 +2,7 @@
 import Base from "#/layouts/Base.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import jacobRolingImage from "#/assets/jacob-roling.webp";
+import jacobRolingImage from "#/assets/jacob-roling.jpeg";
 import { experience, education, skills } from "#/data";
 import { monthFormatter, sortedAndFilteredArticles } from "#utils"; 
 import ArticleList from "#components/ArticleList.astro";
@@ -47,7 +47,9 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
           class="rounded h-[200px] w-auto print:h-[100px]"
           src={jacobRolingImage}
           alt="Jacob Roling"
-          height={200}
+          loading="eager"
+          decoding="sync"
+          height={400}
         />
       </div>
     </div>

@@ -1,12 +1,13 @@
 ---
 import type { MarkdownHeading } from 'astro';
+import type { HTMLAttributes } from 'astro/types';
 
-type Props = {
-  depth: number
+interface Props extends HTMLAttributes<'ol'> {
+  depth?: number
   headings: MarkdownHeading[]
 }
 
-const { depth = 2, headings } = Astro.props;
+const { depth = 2, headings,  ...attributes } = Astro.props;
 
 const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumulator, heading) => {
   if (heading.depth > depth) {
@@ -18,27 +19,14 @@ const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumula
 }, [{ heading: headings[0], children: [] }]) : [];
 ---
 
-{ currentHeadings.length > 0 ?
-  <ol role="list" class="toc-list hidden">
-    { currentHeadings.map(({ heading: { slug, text }, children }) => <li>
-      <a href={`#${slug}`}>
-        {text}
+<ol role="list" {...attributes}>
+    { currentHeadings.length > 0 ? currentHeadings.map(({ heading: { slug, text }, children }) => <li>
+      <a href={`#${slug}`} class="button">
+        <span class="grow">
+          {text}
+        </span>
       </a>
       { children.length > 0 ? <Astro.self depth={depth + 1} headings={children} /> : null }
-    </li>)}
+    </li>)
+    : null }
   </ol>
-: null }
-
-<style>
-  .toc-list {
-    a {
-      &:hover {
-        color: var(--color-neutral-text-high-contrast);
-      }
-    }
-
-    .toc-list {
-      padding-inline-start: 1em;
-    }
-  }
-</style>

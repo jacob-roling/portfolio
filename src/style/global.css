@@ -22,7 +22,7 @@
 :root {
   color-scheme: light dark;
 
-  --spacing-header: 8rem;
+  --spacing-header: 3.875rem;
 
   accent-color: var(--color-primary-solid);
 
@@ -184,4 +184,9 @@ select {
   border-radius: var(--border-radius);
   border-width: var(--border-width);
   margin-block-end: 1em;
+}
+
+[data-icon] {
+  font-size: 1.125em;
+  line-height: 1;
 }
