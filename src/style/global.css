@@ -17,33 +17,36 @@
 
 @theme {
   --spacing-header: var(--spacing-header);
+  --shadow: none;
 }
 
-:root {
-  color-scheme: light dark;
+@layer theme {
+  :root {
+    color-scheme: light dark;
 
-  --spacing-header: 3.125em;
+    --spacing-header: 3.125em;
 
-  accent-color: var(--color-primary-solid);
+    accent-color: var(--color-primary-solid);
 
-  --outline-width: 2px;
-  --outline-color: var(--color-primary-solid);
-  --outline-style: solid;
+    --outline-width: 2px;
+    --outline-color: var(--color-primary-solid);
+    --outline-style: solid;
 
-  --tw-outline-style: var(--outline-style);
+    --tw-outline-style: var(--outline-style);
 
-  --default-font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova",
-    "Nimbus Sans", Arial, sans-serif;
+    --default-font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova",
+      "Nimbus Sans", Arial, sans-serif;
 
-  --border-width: 1px;
-  --border-radius: 8px;
-  --border-style: solid;
+    --border-width: 1px;
+    --border-radius: 8px;
+    --border-style: solid;
 
-  --tw-border-style: var(--border-style);
+    --tw-border-style: var(--border-style);
 
-  color: var(--color-neutral-text);
-  background-color: var(--color-neutral-background);
-  border-color: var(--color-neutral-border);
+    color: var(--color-neutral-text);
+    background-color: var(--color-neutral-background);
+    border-color: var(--color-neutral-border);
+  }
 }
 
 @layer components {

@@ -42,9 +42,9 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
           <span class="sr-only"> page</span>
         </button>
       </div>
-      <div class="hidden md:block print:block print:order-first">
+      <div class="hidden md:block print:block print:order-first shrink-0">
         <Image
-          class="rounded h-[200px] w-auto print:h-[100px]"
+          class="rounded h-[200px] w-auto print:h-[100px] aspect-square"
           src={jacobRolingImage}
           alt="Jacob Roling"
           loading="eager"
@@ -112,7 +112,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     </div>
     <h2 id="projects" class="print:hidden">Projects</h2>
     <div class="grid print:hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element transition-colors focus-within:focus">
+      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element focus-within:border-primary-solid shadow">
         <header>
           <a href={`/blog/${slug}`} class="focus-visible:outline-none">
             <h3>{title}</h3>
