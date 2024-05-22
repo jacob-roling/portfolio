@@ -37,9 +37,9 @@ export default defineConfig({
   integrations: [
     icon(),
     pagefind(),
-    partytown({
-      config: { debug: import.meta.env.DEV },
-    }),
+    // partytown({
+    //   config: { debug: import.meta.env.DEV },
+    // }),
     sitemap(),
     playformInline(),
     playformCompress({

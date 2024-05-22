@@ -31,16 +31,17 @@ const { Content, headings } = await Astro.props.render();
   </Fragment>
 
   <div class="container">
-    <aside data-controller="disclosure" class="breakout px-4 sticky top-header py-2 md:pl-8 bg-neutral-background w-full border-b">
-      <button data-disclosure-target="button" class="peer button outlined group" aria-expanded="false">
-        On this page
-        <Icon name="heroicons:chevron-right" class="group-aria-expanded:hidden" aria-hidden="true" />
-        <Icon name="heroicons:chevron-down" class="hidden group-aria-expanded:block" aria-hidden="true" />
-      </button>
-      <TOC data-disclosure-target="panel" class="mt-4 hidden peer-aria-expanded:block list max-h-[50vh] overflow-y-scroll px-4" headings={headings.filter(heading => heading.depth < 3)} />
-    </aside>
-    <div class="md:flex md:items-start">
-      <main id="main" class="pt-header md:border-r md:pr-8 typography min-h-full">
+    <main id="main" class="lg:flex items-start relative">
+      <aside data-controller="disclosure" class="pt-header mb-8 lg:pl-8 lg:order-last lg:sticky lg:top-header">
+        <button data-disclosure-target="button" class="lg:hidden peer button outlined group" aria-expanded="false">
+          On this page
+          <Icon name="heroicons:chevron-right" class="group-aria-expanded:hidden" aria-hidden="true" />
+          <Icon name="heroicons:chevron-down" class="hidden group-aria-expanded:block" aria-hidden="true" />
+        </button>
+        <p class="hidden md:inline text-neutral-text-high-contrast font-semibold">On this page</p>
+        <TOC data-disclosure-target="panel" class="mt-4 hidden peer-aria-expanded:block lg:block [&_.button]:w-full pb-4 border-b lg:pb-0 lg:border-b-0" headings={headings.filter(heading => heading.depth < 3)} />
+      </aside>
+      <div class="typography lg:pt-header lg:border-r lg:pr-8 ">
         <Breadcrumb />
         <h1>{title}</h1>
         <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
@@ -61,7 +62,7 @@ const { Content, headings } = await Astro.props.render();
             crossorigin="anonymous"
             async>
         </script> -->
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 </Base>
