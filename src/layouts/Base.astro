@@ -14,6 +14,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <link rel="canonical" href={canonicalURL.href.slice(0, -1)} />
     <meta name="theme-color" content="var(--color-neutral-background-subtle)" />
+    <!-- htmx plugins -->
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/preload.js"></script>
     <!-- RSS -->
     <link
       rel="alternate"
@@ -34,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot name="head" />
     <!-- Generated -->
   </head>
-  <body class="text-[1.125rem]" data-controller="pagefind" hx-boost="true" hx-ext="morph, route-announcer">
+  <body class="text-[1.125rem]" data-controller="pagefind" hx-boost="true" hx-ext="morph, route-announcer, preload" hx-preload>
     <header
       id='header'
       class="z-10 print:hidden sticky w-full top-0 border-b bg-neutral-background-subtle"
