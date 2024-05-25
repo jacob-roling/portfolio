@@ -11,7 +11,7 @@ interface Props extends HTMLAttributes<'ul'> {
 const { articles, HeadingTag, ...attributes} = Astro.props;
 ---
 
-<ul role="list" {...attributes}>
+<ul role="list" hx-preload="mouseover" {...attributes}>
   {articles.map(({slug, data: {title, description, datePublished, tags}}) => <li class="relative">
       <a href={`/blog/${slug}`}>
         <HeadingTag>{title}<headingTag/>
