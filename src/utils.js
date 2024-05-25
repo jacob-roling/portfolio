@@ -1,10 +1,13 @@
-import { getCollection } from "astro:content";
-import oldSlugify from "slugify";
+export async function slugify(string) {
+  const { default: oldSlugify } = await import("slugify");
 
-export function slugify(string) {
-  return oldSlugify(string, {
-    lower: true,
-  });
+  return new Promise((res, _) =>
+    res(
+      oldSlugify(string, {
+        lower: true,
+      })
+    )
+  );
 }
 
 export const monthFormatter = new Intl.DateTimeFormat("en-AU", {
@@ -19,6 +22,8 @@ export const dayFormatter = new Intl.DateTimeFormat("en-AU", {
 });
 
 export async function sortedAndFilteredArticles() {
+  const { getCollection } = await import("astro:content");
+
   return (
     await getCollection("articles", ({ data }) => data.draft !== true)
   ).sort(
@@ -34,7 +39,7 @@ export async function trycatch(promise) {
   }
 }
 
-export function importStatic(modulePath) {
+export async function importStatic(modulePath) {
   if (import.meta.env.DEV) {
     return import(/* @vite-ignore */ `${modulePath}`);
   } else {
@@ -42,10 +47,13 @@ export function importStatic(modulePath) {
   }
 }
 
-export function recalculateHeaderSpacing() {
-  const height =
-    Math.floor(
-      document.getElementById("header").getBoundingClientRect().height
-    ) + "px";
-  document.documentElement.style.setProperty("--spacing-header", height);
+export function calculateHeaderSpacing() {
+  const height = document
+    .getElementById("header")
+    .getBoundingClientRect().height;
+  document.documentElement.style.setProperty(
+    "--spacing-header",
+    `${Math.floor(height)}px`
+  );
+  return height;
 }

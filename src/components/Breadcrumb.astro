@@ -7,7 +7,7 @@ const current = parts.pop();
   <ul class="breadcrumb" role="list">
     {
       parts.map((part, i) => (
-        <li data-delimiter="/">
+        <li data-delimiter="/" role="listitem">
           <a href={`/${parts.slice(0, i + 1).join("/")}`}>{part}</a>
         </li>
       ))

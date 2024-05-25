@@ -19,14 +19,52 @@ const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumula
 }, [{ heading: headings[0], children: [] }]) : [];
 ---
 
-<ol role="list" {...attributes}>
-    { currentHeadings.length > 0 ? currentHeadings.map(({ heading: { slug, text }, children }) => <li>
-      <a href={`#${slug}`} class="button w-full text-neutral-text hover:text-neutral-text-high-contrast font-normal">
-        <span class="grow">
-          {text}
-        </span>
-      </a>
-      { children.length > 0 ? <Astro.self depth={depth + 1} headings={children} /> : null }
-    </li>)
-    : null }
-  </ol>
+<ol role="list" {...attributes} data-toc-target="list">
+  { currentHeadings.length > 0 ? currentHeadings.map(({ heading: { slug, text }, children }) => <li>
+    <a href={`#${slug}`} class="button w-full text-neutral-text hover:text-neutral-text-high-contrast font-normal">
+      <span class="grow">
+        {text}
+      </span>
+    </a>
+    { children.length > 0 ? <Astro.self depth={depth + 1} headings={children} /> : null }
+  </li>)
+  : null }
+</ol>
+
+<!-- <script define:vars={{ headings }}>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const headingElements = headings.reduce((pre, { slug }) => {
+      return pre.concat(document.getElementById(slug));
+    }, []);
+
+    // const headerHeight = document
+    //   .getElementById("header")
+    //   .getBoundingClientRect().height;
+  
+    const headingObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          console.log(entry);
+        } 
+      });
+    }, {
+      rootMargin: `-25% 0px 0px 0px`,
+      // threshold: 1.0,
+    });
+
+    headingElements.forEach(heading => headingObserver.observe(heading));
+  });  
+
+
+  // console.log(Array.from(document.querySelectorAll("a").values()).filter(a => a.));
+  // const tocAnchors = Array.from(document.querySelectorAll("a.toc").values());
+  // tocAnchors.forEach(a => {
+  //   a.addEventListener("click", (event) => {
+  //     tocAnchors.forEach(a => {
+  //       a.removeAttribute("aria-current");
+  //     })
+  //     a.setAttribute("aria-current", "true");
+  //   });
+  // });
+</script> -->

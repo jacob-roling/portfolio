@@ -165,6 +165,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       import ThemeController from "#controllers/theme_controller";
       import RouteAnnouncer from "htmx-route-announcer";
       import PagefindController from "#controllers/pagefind_controller";
+      import TOCController from "#controllers/toc_controller";
       // import { recalculateHeaderSpacing } from "#utils";
       import { registerComponents } from "@jroling/stimui";
 
@@ -179,6 +180,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       window.Stimulus = Application.start();
       window.Stimulus.register("theme", ThemeController);
       window.Stimulus.register("pagefind", PagefindController);
+      window.Stimulus.register("toc", TOCController);
       registerComponents(window.Stimulus);
 
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
@@ -186,6 +188,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
       document.addEventListener("theme:switch", () => {
         metaThemeColor.setAttribute("content", window.getComputedStyle(document.documentElement).getPropertyValue("--color-neutral-background-subtle"));
+      });
+
+      window.htmx.on('htmx:afterSwap', () => {
+        Array.from(document.querySelectorAll("header a").values()).forEach(a => {
+          if (a.getAttribute("href") === window.location.pathname) {
+            a.setAttribute("aria-current", "page");
+            return;
+          }
+          a.removeAttribute("aria-current");
+        });
       });
     </script>
   </body>
