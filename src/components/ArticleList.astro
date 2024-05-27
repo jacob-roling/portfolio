@@ -12,12 +12,14 @@ const { articles, HeadingTag, ...attributes} = Astro.props;
 ---
 
 <ul role="list" hx-preload="mouseover" {...attributes}>
-  {articles.map(({slug, data: {title, description, datePublished, tags}}) => <li class="relative">
+  {
+    articles.map(({ slug, data: { title, description, datePublished, tags }}) => <li class="relative">
       <a href={`/blog/${slug}`}>
-        <HeadingTag>{title}<headingTag/>
+        <HeadingTag set:text={title} />
         <span class="expand-to-relative" aria-hidden="true" />
       </a>
       <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: {tags.join(", ")}.</p>
       <p class="line-clamp-3">{description}</p>
-  </li>)}
+    </li>)
+  }
 </ul>

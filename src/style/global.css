@@ -1,4 +1,4 @@
-@layer preflight, components, utilities, theme;
+@layer preflight, components, theme, utilities;
 
 @import "tailwindcss/theme" layer(theme);
 @import "tailwindcss/utilities" layer(utilities);
@@ -18,6 +18,8 @@
 @theme {
   --spacing-header: var(--spacing-header);
   --shadow: none;
+  --radius: 0.25rem;
+  --radius-container: 0.5rem;
 }
 
 @layer theme {
@@ -29,6 +31,7 @@
     accent-color: var(--color-primary-solid);
 
     --outline-width: 2px;
+    --outline-offset: 2px;
     --outline-color: var(--color-primary-solid);
     --outline-style: solid;
 
@@ -38,7 +41,6 @@
       "Nimbus Sans", Arial, sans-serif;
 
     --border-width: 1px;
-    --border-radius: 8px;
     --border-style: solid;
 
     --tw-border-style: var(--border-style);
@@ -46,10 +48,13 @@
     color: var(--color-neutral-text);
     background-color: var(--color-neutral-background);
     border-color: var(--color-neutral-border);
+
+    scrollbar-color: var(--color-neutral-text) var(--color-neutral-background);
+    scrollbar-gutter: stable both-edges;
   }
 }
 
-@layer components {
+@layer theme {
   .outline {
     outline-color: var(--color-primary-solid);
   }
@@ -66,7 +71,8 @@
       text-decoration-color: var(--color-neutral-border-element);
 
       &:hover,
-      &[aria-current="page"] {
+      &[aria-current],
+      &:focus-visible {
         color: var(--color-neutral-text-high-contrast);
         text-decoration-color: var(--color-neutral-text-high-contrast);
       }
@@ -121,6 +127,14 @@
   .container {
     @media (--xl) {
       --_width: 1024px;
+    }
+  }
+
+  .card {
+    background-color: var(--color-neutral-background-subtle);
+
+    &:focus-within {
+      outline-color: var(--outline-color);
     }
   }
 
@@ -193,7 +207,7 @@
 
   .astro-code {
     padding: 1em;
-    border-radius: var(--border-radius);
+    border-radius: var(--radius);
     border-width: var(--border-width);
     margin-block-end: 1em;
   }

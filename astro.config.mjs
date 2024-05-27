@@ -13,6 +13,7 @@ import remarkMath from "remark-math";
 import rehypeWrap from "rehype-wrap";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 import rehypeKatex from "rehype-katex";
+import rehypeExternalLinks from "rehype-external-links";
 
 const rehypeWrapTable = [
   rehypeWrap,
@@ -32,7 +33,12 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkEmoji, remarkMath],
-    rehypePlugins: [rehypeWrapTable, rehypeAccessibleEmojis, rehypeKatex],
+    rehypePlugins: [
+      rehypeWrapTable,
+      rehypeAccessibleEmojis,
+      rehypeKatex,
+      [rehypeExternalLinks, { rel: ["external"] }],
+    ],
   },
   vite: {
     // plugins: [tailwindcss()]

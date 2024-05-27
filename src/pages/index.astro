@@ -112,7 +112,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     </div>
     <h2 id="projects" class="print:hidden">Projects</h2>
     <div class="grid print:hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" hx-preload="mouseover">
-      {projects.map(({ slug, data: { title, description } }) => <article class="relative p-4 border rounded bg-neutral-background-subtle hover:border-neutral-border-hover hover:bg-neutral-background-element focus-within:border-primary-solid shadow">
+      {projects.map(({ slug, data: { title, description } }) => <article class="relative card">
         <header>
           <a href={`/blog/${slug}`} class="focus-visible:outline-none">
             <h3>{title}</h3>

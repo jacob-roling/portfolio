@@ -1,13 +1,9 @@
-export async function slugify(string) {
-  const { default: oldSlugify } = await import("slugify");
+import oldSlugify from "slugify";
 
-  return new Promise((res, _) =>
-    res(
-      oldSlugify(string, {
-        lower: true,
-      })
-    )
-  );
+export function slugify(string) {
+  return oldSlugify(string, {
+    lower: true,
+  });
 }
 
 export const monthFormatter = new Intl.DateTimeFormat("en-AU", {

@@ -5,7 +5,7 @@ import TOC from "#components/TOC.astro";
 import { dayFormatter, slugify, sortedAndFilteredArticles } from "#utils";
 import { Icon } from "astro-icon/components";
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths() {
   const articles = await sortedAndFilteredArticles();
 
   return articles.map((post) => ({

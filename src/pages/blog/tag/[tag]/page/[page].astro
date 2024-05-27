@@ -17,9 +17,13 @@ export async function getStaticPaths({ paginate }) {
   return tags.flatMap((unslugifiedTag) => {
     const tag = slugify(unslugifiedTag);
     const filteredArticles = articles.filter((article) =>
-      article.data.tags.map(slugify).includes(tag)
+      article.data.tags.flatMap(slugify).includes(tag)
     );
-    return paginate(filteredArticles, { params: { tag }, pageSize });
+
+    return paginate(filteredArticles, { params: { tag }, pageSize }).map(article => {
+      article.props = { unslugifiedTag, ...article.props };
+      return article;
+    });
   });
 }
 
@@ -33,19 +37,20 @@ const tags = Array.from(
 
 type Props = {
   page: Page<CollectionEntry<'articles'>>
+  unslugifiedTag: string
 }
 
-const { page } = Astro.props;
+const { page, unslugifiedTag } = Astro.props;
 ---
 
 <Base>
   <Fragment slot="head">
-    <title>Articles tagged '{tag}' — Jacob Roling</title>
+    <title>Articles tagged '{unslugifiedTag}' — Jacob Roling</title>
   </Fragment>
 
   <main id="main" class="container typography pt-header">
     <Breadcrumb />
-    <h1>Articles tagged '{tag}'</h1>
+    <h1>Articles tagged '{unslugifiedTag}'</h1>
     <p>Articles by tag: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
     <ArticleList articles={page.data} HeadingTag="h2" />
     <Pagination {page} />
