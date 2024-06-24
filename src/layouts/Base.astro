@@ -46,9 +46,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <script>
       import { Application } from "@hotwired/stimulus";
-      import ThemeController from "#controllers/theme_controller";
-      import PagefindController from "#controllers/pagefind_controller";
-      import TOCController from "#controllers/toc_controller";
+      import ThemeController from "#controllers/theme";
+      import PagefindController from "#controllers/pagefind";
+      import TOCController from "#controllers/toc";
       import { registerComponents } from "stimui";
       import "unpoly";
 

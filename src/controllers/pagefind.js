@@ -24,7 +24,7 @@ export default class extends Controller {
       },
       {
         signal: this.abortController.signal,
-      }
+      },
     );
   }
 
@@ -39,12 +39,16 @@ export default class extends Controller {
       },
       {
         signal: this.abortController.signal,
-      }
+      },
     );
   }
 
   showModal() {
     this.dialogTarget.showModal();
+  }
+
+  close() {
+    this.dialogTarget.close();
   }
 
   search(query) {
@@ -69,6 +73,7 @@ export default class extends Controller {
 
           const href = document.createElement("a");
           href.setAttribute("href", url.length > 1 ? url.slice(0, -1) : url);
+          href.setAttribute("data-action", "pagefind#close");
 
           const heading = document.createElement("h3");
           heading.textContent = title;
@@ -86,8 +91,8 @@ export default class extends Controller {
           item.appendChild(p);
 
           this.resultsTarget.replaceChild(item, children[i]);
-          window.htmx.process(href);
-        })
+          up.hello(href);
+        }),
       );
     }, 250);
   }

@@ -14,12 +14,12 @@ export default class extends Controller {
 
     this.headings = this.links.reduce((pre, link) => {
       return pre.concat(
-        document.getElementById(link.getAttribute("href").slice(1))
+        document.getElementById(link.getAttribute("href").slice(1)),
       );
     }, []);
 
     this.observe = () => {
-      if (this.observer) observer.disconnect();
+      if (this.observer) this.observer.disconnect();
 
       this.observer = new IntersectionObserver(this.setCurrent.bind(this), {
         root: document.getElementById("header"),
@@ -39,7 +39,7 @@ export default class extends Controller {
       // Disable intersection observer while window is resizing.
       if (this.observer) this.observer.disconnect();
       clearTimeout(timeout);
-      timeout = setTimeout(() => onIdle(observe), 200);
+      timeout = setTimeout(() => onIdle(this.observe), 200);
     });
   }
 

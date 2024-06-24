@@ -2,29 +2,50 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<dialog data-pagefind-target="dialog" class="m-auto mt-header max-w-prose w-full rounded bg-neutral-background-subtle border p-8 backdrop:bg-neutral-text/5 backdrop:backdrop-blur typography">
-  <form class="absolute top-2 right-2" method="dialog" hx-boost="false">
+<dialog
+  data-pagefind-target="dialog"
+  class="mt-header bg-neutral-background-subtle backdrop:bg-neutral-text/5 typography m-auto w-full max-w-prose rounded border p-8 backdrop:backdrop-blur"
+>
+  <form class="absolute top-2 right-2" method="dialog" up-submit="false">
     <button class="button icon outlined" type="submit">
       <Icon name="heroicons:x-mark" aria-hidden="true" />
-      <span class="sr-only">
-        Close search
-      </span>
+      <span class="sr-only"> Close search </span>
     </button>
   </form>
   <div class="grid grid-cols-1">
     <label for="search-query">
-      <h2>
-        Search
-      </h2>
+      <h2>Search</h2>
     </label>
-    <input data-pagefind-target="input" name="query" type="text" placeholder="Search for pages, articles, tags, anything..." autocomplete="off" autofocus>
+    <input
+      data-pagefind-target="input"
+      name="query"
+      type="text"
+      placeholder="Search for pages, articles, tags, anything..."
+      autocomplete="off"
+      autofocus
+    />
   </div>
   <template data-pagefind-target="placeholder">
     <li class="mt-4">
-      <div class="inline-block w-1/3 animate-pulse h-[1.5em] bg-neutral-text rounded"></div>
-      <div class="inline-block w-full animate-pulse h-[1em] bg-neutral-text rounded"></div>
-      <div class="inline-block w-full animate-pulse h-[1em] bg-neutral-text rounded"></div>
+      <div
+        class="bg-neutral-text inline-block h-[1.5em] w-1/3 animate-pulse rounded"
+      >
+      </div>
+      <div
+        class="bg-neutral-text inline-block h-[1em] w-full animate-pulse rounded"
+      >
+      </div>
+      <div
+        class="bg-neutral-text inline-block h-[1em] w-full animate-pulse rounded"
+      >
+      </div>
     </li>
   </template>
-  <ul data-pagefind-target="results" role="list" class="mt-8 overflow-y-scroll max-h-[50vh]" tabindex="-1"></ul>
+  <ul
+    data-pagefind-target="results"
+    role="list"
+    class="mt-8 max-h-[50vh] overflow-y-scroll"
+    tabindex="-1"
+  >
+  </ul>
 </dialog>
