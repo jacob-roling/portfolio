@@ -10,12 +10,8 @@ export async function GET(context) {
 
   return rss({
     title: "Jacob's Blog",
-<<<<<<< HEAD
-    description: "A humble Astronaut's guide to the stars",
-=======
     description:
       "Software engineer focused on building products with simplicity and accessibility in mind.",
->>>>>>> 40dd981 (chore: savepoint)
     site: context.site,
     trailingSlash: false,
     items: articles.map(
@@ -27,11 +23,7 @@ export async function GET(context) {
         content: sanitizeHtml(parser.render(body), {
           allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
         }),
-<<<<<<< HEAD
-      })
-=======
       }),
->>>>>>> 40dd981 (chore: savepoint)
     ),
     customData: `<language>en-au</language>`,
   });
