@@ -34,7 +34,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkEmoji, remarkMath],
     rehypePlugins: [
-      rehypeWrapTable,
+      // rehypeWrapTable,
       rehypeAccessibleEmojis,
       rehypeKatex,
       [rehypeExternalLinks, { rel: ["external"] }],

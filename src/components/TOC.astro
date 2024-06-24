@@ -1,34 +1,48 @@
 ---
-import type { MarkdownHeading } from 'astro';
-import type { HTMLAttributes } from 'astro/types';
+import type { MarkdownHeading } from "astro";
+import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'ol'> {
-  depth?: number
-  headings: MarkdownHeading[]
+interface Props extends HTMLAttributes<"ol"> {
+  depth?: number;
+  headings: MarkdownHeading[];
 }
 
-const { depth = 2, headings,  ...attributes } = Astro.props;
+const { depth = 2, headings, ...attributes } = Astro.props;
 
-const currentHeadings = headings.length > 0 ? headings.slice(1).reduce((accumulator, heading) => {
-  if (heading.depth > depth) {
-    accumulator[accumulator.length - 1].children.push(heading);
-  } else {
-    accumulator.push({ heading, children: [] });
-  }
-  return accumulator;
-}, [{ heading: headings[0], children: [] }]) : [];
+const currentHeadings =
+  headings.length > 0
+    ? headings.slice(1).reduce(
+        (accumulator, heading) => {
+          if (heading.depth > depth) {
+            accumulator[accumulator.length - 1].children.push(heading);
+          } else {
+            accumulator.push({ heading, children: [] });
+          }
+          return accumulator;
+        },
+        [{ heading: headings[0], children: [] }],
+      )
+    : [];
 ---
 
 <ol role="list" {...attributes} data-toc-target="list">
-  { currentHeadings.length > 0 ? currentHeadings.map(({ heading: { slug, text }, children }) => <li>
-    <a href={`#${slug}`} class="button w-full text-neutral-text hover:text-neutral-text-high-contrast font-normal">
-      <span class="grow">
-        {text}
-      </span>
-    </a>
-    { children.length > 0 ? <Astro.self depth={depth + 1} headings={children} /> : null }
-  </li>)
-  : null }
+  {
+    currentHeadings.length > 0
+      ? currentHeadings.map(({ heading: { slug, text }, children }) => (
+          <li>
+            <a
+              href={`#${slug}`}
+              class="button text-neutral-text hover:text-neutral-text-high-contrast w-full font-normal"
+            >
+              <span class="grow">{text}</span>
+            </a>
+            {children.length > 0 ? (
+              <Astro.self depth={depth + 1} headings={children} />
+            ) : null}
+          </li>
+        ))
+      : null
+  }
 </ol>
 
 <!-- <script define:vars={{ headings }}>
