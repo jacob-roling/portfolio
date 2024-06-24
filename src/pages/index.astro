@@ -6,6 +6,10 @@ import jacobRolingImage from "#/assets/jacob-roling.jpeg";
 import { experience, education, skills } from "#/data";
 import { monthFormatter, sortedAndFilteredArticles } from "#utils"; 
 import ArticleList from "#components/ArticleList.astro";
+<<<<<<< HEAD
+=======
+import ProjectsList from "#components/ProjectsList.astro";
+>>>>>>> 40dd981 (chore: savepoint)
 
 const articles = await sortedAndFilteredArticles();
 const projects = articles.filter(({data}) => data.tags.includes("Project"));
@@ -111,6 +115,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
       }
     </div>
     <h2 id="projects" class="print:hidden">Projects</h2>
+<<<<<<< HEAD
     <div class="grid print:hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" hx-preload="mouseover">
       {projects.map(({ slug, data: { title, description } }) => <article class="relative card">
         <header>
@@ -124,6 +129,9 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
         </p>
       </article>)}
     </div>
+=======
+    <ProjectsList {projects} />
+>>>>>>> 40dd981 (chore: savepoint)
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
     <ArticleList class="print:hidden" articles={articles.slice(0, 3)} HeadingTag="h3" />
   </main>

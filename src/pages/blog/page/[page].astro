@@ -16,24 +16,47 @@ export async function getStaticPaths({ paginate }) {
 const articles = await sortedAndFilteredArticles();
 
 const tags = Array.from(
+<<<<<<< HEAD
   new Set(articles.flatMap(({ data: { tags } }) => tags)).values()
 );
 
 type Props = {
   page: Page<CollectionEntry<'articles'>>
 }
+=======
+  new Set(articles.flatMap(({ data: { tags } }) => tags)).values(),
+);
+
+type Props = {
+  page: Page<CollectionEntry<"articles">>;
+};
+>>>>>>> 40dd981 (chore: savepoint)
 
 const { page } = Astro.props;
 ---
 
 <Base>
   <Fragment slot="head">
+<<<<<<< HEAD
     <title>Blog — Jacob Roling</title>
+=======
+    <title>Jacob Roling's Blog</title>
+>>>>>>> 40dd981 (chore: savepoint)
   </Fragment>
   <main id="main" class="container pt-header typography">
     <Breadcrumb />
     <h1 id="blog">Blog</h1>
+<<<<<<< HEAD
     <p>Articles by tag: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
+=======
+    <p>
+      Articles by tag: <Fragment
+        set:html={tags
+          .map((tag) => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`)
+          .join(", ")}
+      />.
+    </p>
+>>>>>>> 40dd981 (chore: savepoint)
     <ArticleList articles={page.data} HeadingTag="h2" />
     <Pagination {page} />
   </main>

@@ -1,6 +1,11 @@
 ---
 import "#/style/global.css";
+<<<<<<< HEAD
 import { Icon } from "astro-icon/components";
+=======
+import Header from "#components/Header.astro";
+import Footer from "#components/Footer.astro";
+>>>>>>> 40dd981 (chore: savepoint)
 import Search from "#components/Search.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -22,13 +27,23 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       href={`${Astro.site}rss.xml`}
     />
     <!-- KaTeX -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+=======
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+      integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+      crossorigin="anonymous"
+    />
+>>>>>>> 40dd981 (chore: savepoint)
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- Custom -->
     <slot name="head" />
     <!-- Generated -->
   </head>
+<<<<<<< HEAD
   <body class="text-[1.125rem]" data-controller="pagefind" hx-boost="true" hx-ext="morph, route-announcer, preload" hx-swap="morph:innerHTML">
     <header
       id='header'
@@ -150,18 +165,30 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       </nav>
       <p class="mt-4">&copy; {new Date().getFullYear()} Jacob Roling</p>
     </footer>
+=======
+  <body class="text-[1.125rem]" data-controller="pagefind" up-main="true">
+    <Header />
+
+    <slot />
+
+    <Footer />
+>>>>>>> 40dd981 (chore: savepoint)
 
     <Search />
 
     <script>
+<<<<<<< HEAD
       import htmx from "htmx.org";
       import Preload from "#preload";
       import RouteAnnouncer from "htmx-route-announcer";
+=======
+>>>>>>> 40dd981 (chore: savepoint)
       import { Application } from "@hotwired/stimulus";
       import ThemeController from "#controllers/theme_controller";
       import PagefindController from "#controllers/pagefind_controller";
       import TOCController from "#controllers/toc_controller";
       import { registerComponents } from "stimui";
+<<<<<<< HEAD
 
       window.htmx = htmx;
       window.htmx.config.globalViewTransitions = true;
@@ -169,6 +196,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       window.htmx.defineExtension("preload", Preload);
       await import("idiomorph/dist/idiomorph-ext.js");
      
+=======
+      import "unpoly";
+
+      window.up.log.disable();
+      window.up.link.config.followSelectors.push("a[href]");
+      window.up.link.config.instantSelectors.push("a[href]");
+      window.up.link.config.preloadSelectors.push("a[href]");
+      window.up.form.config.submitSelectors.push("form");
+
+>>>>>>> 40dd981 (chore: savepoint)
       window.Stimulus = Application.start();
       window.Stimulus.register("theme", ThemeController);
       window.Stimulus.register("pagefind", PagefindController);
@@ -176,6 +213,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       registerComponents(window.Stimulus);
 
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+<<<<<<< HEAD
       metaThemeColor.setAttribute("content", window.getComputedStyle(document.documentElement).getPropertyValue("--color-neutral-background-subtle"));
 
       document.addEventListener("theme:switch", () => {
@@ -190,6 +228,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           }
           a.removeAttribute("aria-current");
         });
+=======
+      metaThemeColor.setAttribute(
+        "content",
+        window
+          .getComputedStyle(document.documentElement)
+          .getPropertyValue("--color-neutral-background-subtle"),
+      );
+
+      document.addEventListener("theme:switch", () => {
+        metaThemeColor.setAttribute(
+          "content",
+          window
+            .getComputedStyle(document.documentElement)
+            .getPropertyValue("--color-neutral-background-subtle"),
+        );
+>>>>>>> 40dd981 (chore: savepoint)
       });
     </script>
   </body>

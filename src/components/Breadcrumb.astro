@@ -3,17 +3,30 @@ const parts = Astro.url.pathname.split("/").slice(1);
 const current = parts.pop();
 ---
 
+<<<<<<< HEAD
 <nav aria-label="breadcrumb" class="block min-h-fit">
   <ul class="breadcrumb" role="list">
     {
       parts.map((part, i) => (
         <li data-delimiter="/" role="listitem">
+=======
+<nav aria-label="breadcrumb" class="mb-8 block min-h-fit">
+  <ul class="breadcrumb m-0">
+    {
+      parts.map((part, i) => (
+        <li data-delimiter="/">
+>>>>>>> 40dd981 (chore: savepoint)
           <a href={`/${parts.slice(0, i + 1).join("/")}`}>{part}</a>
         </li>
       ))
     }
+<<<<<<< HEAD
     <li data-delimiter="/" role="listitem">
       <a href="#" aria-current="page">{current}</a>
+=======
+    <li data-delimiter="/">
+      <a href={Astro.url.pathname}>{current}</a>
+>>>>>>> 40dd981 (chore: savepoint)
     </li>
   </ul>
 </nav>

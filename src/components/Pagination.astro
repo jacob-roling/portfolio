@@ -10,7 +10,7 @@ const { page } = Astro.props;
 ---
 
 <nav aria-label="pagination">
-  <ul role="list">
+  <ul role="list" class="flex items-center gap-4">
     {
       page.url.prev ? (
         <li>
@@ -21,7 +21,7 @@ const { page } = Astro.props;
       ) : null
     }
     <li>
-      <a href="#" aria-current="page">{page.currentPage}</a>
+      <a href={Astro.url.pathname} aria-current="page">{page.currentPage}</a>
     </li>
     {
       page.url.next ? (

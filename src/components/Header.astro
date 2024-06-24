@@ -1,0 +1,115 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<header
+  id="header"
+  class="bg-neutral-background-subtle sticky top-0 z-10 w-full border-b print:hidden"
+  up-keep="true"
+  up-fixed="top"
+>
+  <dialog id="banner-dialog" class="static w-full" open>
+    <div
+      class="container bg-warning-background-element text-warning-text-high-contrast border-warning-border border-b py-1"
+    >
+      <div class="flex items-center justify-between gap-8">
+        <p class="grow text-center">
+          This website is currently under construction. <span aria-hidden="true"
+            >🚧</span
+          >
+        </p>
+        <button
+          class="button icon warning outlined"
+          onclick="document.getElementById('banner-dialog').close()"
+        >
+          <Icon name="heroicons:x-mark" aria-hidden="true" />
+          <span class="sr-only"> Close banner message </span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+  <nav class="container py-2" aria-label="primary" class="py-2">
+    <ul class="flex gap-4" role="list">
+      <li class="sr-only focus-within:not-sr-only" role="listitem">
+        <a class="button" href="#main">Skip to content</a>
+      </li>
+      <li role="listitem">
+        <a class="button -ml-4" href="/">Jacob Roling</a>
+      </li>
+      <li class="hidden md:list-item" role="listitem">
+        <a class="button" href="/blog/page/1">Blog</a>
+      </li>
+      <li class="hidden md:list-item" role="listitem">
+        <a class="button" href="/projects">Projects</a>
+      </li>
+      <li class="ml-auto hidden md:list-item" role="listitem">
+        <button class="button outlined" data-action="pagefind#showModal">
+          <Icon
+            class="inline"
+            name="heroicons:magnifying-glass"
+            aria-hidden="true"
+          />
+          Search
+          <span class="badge kbd">
+            <kbd>Ctrl</kbd> + <kbd>k</kbd>
+          </span>
+        </button>
+      </li>
+      <li
+        class="ml-auto md:hidden"
+        data-controller="disclosure"
+        role="listitem"
+      >
+        <button
+          data-disclosure-target="summary"
+          class="button icon outlined group md:hidden"
+        >
+          <Icon
+            class="group-aria-expanded:hidden"
+            name="heroicons:bars-3"
+            aria-hidden="true"
+          />
+          <Icon
+            class="hidden group-aria-expanded:block"
+            name="heroicons:x-mark"
+            aria-hidden="true"
+          />
+          <span class="sr-only"> Close </span>
+        </button>
+        <ul
+          data-disclosure-target="details"
+          class="bg-neutral-background-subtle absolute top-full left-0 hidden max-h-screen w-full overflow-y-scroll border-y py-4 px-8 data-[expanded]:block [&_.button]:w-full"
+          role="list"
+        >
+          <li role="listitem">
+            <button
+              class="button"
+              data-action="pagefind#showModal disclosure#close"
+            >
+              <span class="grow"> Search </span>
+              <Icon
+                class="inline"
+                name="heroicons:magnifying-glass"
+                aria-hidden="true"
+              />
+            </button>
+          </li>
+          <li role="listitem">
+            <a
+              href="/blog/page/1"
+              class="button"
+              data-action="disclosure#close"
+            >
+              <span class="grow"> Blog </span>
+            </a>
+          </li>
+          <li role="listitem">
+            <a href="/#projects" class="button" data-action="disclosure#close">
+              <span class="grow"> Projects </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>

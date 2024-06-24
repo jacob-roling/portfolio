@@ -1,0 +1,22 @@
+---
+const { projects } = Astro.props;
+---
+
+<div
+  class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 print:hidden"
+  hx-preload="mouseover"
+>
+  {
+    projects.map(({ slug, data: { title, description } }) => (
+      <article class="card relative">
+        <header>
+          <a href={`/blog/${slug}`} class="focus-visible:outline-none">
+            <h3>{title}</h3>
+            <span class="expand-to-relative" aria-hidden="true" />
+          </a>
+        </header>
+        <p class="line-clamp-3">{description}</p>
+      </article>
+    ))
+  }
+</div>

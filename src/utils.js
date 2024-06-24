@@ -21,9 +21,18 @@ export async function sortedAndFilteredArticles() {
   const { getCollection } = await import("astro:content");
 
   return (
+<<<<<<< HEAD
     await getCollection("articles", ({ data }) => data.draft !== true)
   ).sort(
     (a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime()
+=======
+    await getCollection(
+      "articles",
+      ({ data }) => data.draft !== import.meta.env.PROD,
+    )
+  ).sort(
+    (a, b) => b.data.datePublished.getTime() - a.data.datePublished.getTime(),
+>>>>>>> 40dd981 (chore: savepoint)
   );
 }
 
@@ -49,7 +58,11 @@ export function calculateHeaderSpacing() {
     .getBoundingClientRect().height;
   document.documentElement.style.setProperty(
     "--spacing-header",
+<<<<<<< HEAD
     `${Math.floor(height)}px`
+=======
+    `${Math.floor(height)}px`,
+>>>>>>> 40dd981 (chore: savepoint)
   );
   return height;
 }

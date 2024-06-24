@@ -1,0 +1,23 @@
+<footer
+  class="container typography bg-neutral-background-subtle border-t py-4 print:hidden"
+>
+  <nav aria-label="footer">
+    <ul class="flex max-w-full items-center gap-4" role="list">
+      <li>
+        <a href="/sitemap-index.xml">Sitemap</a>
+      </li>
+      <li>
+        <a href="/rss.xml">RSS</a>
+      </li>
+      <li class="ml-auto">
+        <label for="theme-select">Theme: </label>
+        <select data-controller="theme" name="theme" id="theme-select">
+          <option value="auto">Auto</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </li>
+    </ul>
+  </nav>
+  <p class="mt-4">&copy; {new Date().getFullYear()} Jacob Roling</p>
+</footer>

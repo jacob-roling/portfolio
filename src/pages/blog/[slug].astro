@@ -30,6 +30,7 @@ const { Content, headings } = await Astro.props.render();
     <meta name="description" content={description} />
   </Fragment>
 
+<<<<<<< HEAD
   <div class="container" data-controller="toc">
     <main id="main" class="lg:flex items-start relative">
       <aside data-controller="disclosure" class="pt-header mb-8 lg:pl-8 lg:order-last lg:sticky lg:top-header">
@@ -44,6 +45,55 @@ const { Content, headings } = await Astro.props.render();
         <Breadcrumb />
         <h1>{title}</h1>
         <p>Published <time datetime={datePublished.toISOString()}>{dayFormatter.format(datePublished)}</time>. Tagged: <Fragment set:html={tags.map(tag => `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`).join(", ")} />.</p>
+=======
+  <main id="main" class="container" data-controller="toc">
+    <div class="relative items-start lg:flex">
+      <div
+        data-controller="disclosure"
+        class="pt-header lg:top-header mb-8 lg:sticky lg:order-last lg:pl-8"
+      >
+        <button
+          data-disclosure-target="summary"
+          class="peer button outlined group lg:hidden"
+          aria-expanded="false"
+        >
+          On this page
+          <Icon
+            name="heroicons:chevron-right"
+            class="transition-transform group-aria-expanded:rotate-90"
+            aria-hidden="true"
+          />
+        </button>
+        <p
+          class="text-neutral-text-high-contrast hidden font-semibold lg:inline"
+        >
+          On this page
+        </p>
+        <TOC
+          data-disclosure-target="details"
+          class="mt-4 hidden border-b pb-4 peer-aria-expanded:block lg:block lg:border-b-0 lg:pb-0"
+          headings={headings.filter((heading) => heading.depth < 3)}
+        />
+      </div>
+      <div
+        data-toc-target="content"
+        class="typography lg:pt-header lg:border-r lg:pr-8"
+      >
+        <Breadcrumb />
+        <h1>{title}</h1>
+        <p>
+          Published <time datetime={datePublished.toISOString()}
+            >{dayFormatter.format(datePublished)}</time
+          >. Tagged: <Fragment
+            set:html={tags
+              .map(
+                (tag) =>
+                  `<a href="/blog/tag/${slugify(tag)}/page/1">${tag}</a>`,
+              )
+              .join(", ")}
+          />.
+        </p>
+>>>>>>> 40dd981 (chore: savepoint)
         <Content />
         <!-- <article>
           <h2 id="comments">Comments</h2>
@@ -62,6 +112,11 @@ const { Content, headings } = await Astro.props.render();
             async>
         </script> -->
       </div>
+<<<<<<< HEAD
     </main>
   </div>
+=======
+    </div>
+  </main>
+>>>>>>> 40dd981 (chore: savepoint)
 </Base>
