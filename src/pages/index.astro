@@ -2,7 +2,7 @@
 import Base from "#/layouts/Base.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import jacobRolingImage from "#/assets/jacob-roling.jpeg";
+import jacobRolingImage from "#/assets/jacob-roling.png";
 import { experience, education, skills } from "#/data";
 import { monthFormatter, sortedAndFilteredArticles } from "#utils"; 
 import ArticleList from "#components/ArticleList.astro";
@@ -45,7 +45,7 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
       </div>
       <div class="hidden md:block print:block print:order-first shrink-0">
         <Image
-          class="rounded h-[200px] w-auto print:h-[100px] aspect-square"
+          class="rounded h-[300px] w-auto print:h-[100px]"
           src={jacobRolingImage}
           alt="Jacob Roling"
           loading="eager"
@@ -69,6 +69,8 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
     <p class="hidden print:block">
       {skills.join(', ')}
     </p>
+    <h2 id="projects" class="print:hidden">Projects</h2>
+    <ProjectsList {projects} />
     <h2 id="work-experience">Work Experience</h2>
     <div>
       {
@@ -111,8 +113,6 @@ const projects = articles.filter(({data}) => data.tags.includes("Project"));
         ))
       }
     </div>
-    <h2 id="projects" class="print:hidden">Projects</h2>
-    <ProjectsList {projects} />
     <h2 id="latest-posts" class="print:hidden">Latest Posts</h2>
     <ArticleList class="print:hidden" articles={articles.slice(0, 3)} HeadingTag="h3" />
   </main>

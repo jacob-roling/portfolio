@@ -1,6 +1,6 @@
 ---
 draft: true
-title: "Signals are here and Hypermedia has returned, now Stimulus demands your attention"
+title: "Signals are here and Hypermedia has returned, now Stimulus demands attention"
 description: asdnkajsn
 datePublished: 2024-06-24
 tags:
