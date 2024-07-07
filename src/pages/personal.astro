@@ -1,0 +1,100 @@
+---
+import Base from "#/layouts/Base.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import jacobRolingImage from "#/assets/jacob-roling.png";
+import { experience, education } from "#/data";
+import { monthFormatter } from "#utils";
+---
+
+<Base>
+  <Fragment slot="head">
+    <title>Jacob Roling Resume</title>
+  </Fragment>
+
+  <main id="main" class="container typography pt-header print:pt-0">
+    <div class="flex gap-8">
+      <div class="grow">
+        <h1 id="jacob-roling" class="print:text-[2rem]">Jacob Roling</h1>
+        <ul role="list" class="space-y-1">
+          <li>
+            <Icon class="inline" name="heroicons:map-pin" aria-hidden="true" />
+            <span class="sr-only">I am located in </span>
+            Victor Harbour, South Australia<span class="sr-only">.</span>
+          </li>
+          <li>
+            <Icon class="inline" name="heroicons:at-symbol" aria-hidden="true" />
+            <span class="sr-only">My email is </span>
+            jacob.roling@hey.com<span class="sr-only">.</span>
+          </li>
+          <li>
+            <Icon class="inline" name="heroicons:phone" aria-hidden="true" />
+            <span class="sr-only">My phone number is </span>
+            0476 162 450<span class="sr-only">.</span>
+          </li>
+        </ul>
+        <button class="print:hidden button primary solid" onclick="print()">
+          <Icon class="inline" name="heroicons:printer" aria-hidden="true" />
+          Print
+          <span class="sr-only"> page</span>
+        </button>
+      </div>
+      <div class="hidden md:block print:block print:order-first shrink-0">
+        <Image
+          class="rounded h-[300px] w-auto print:h-[100px]"
+          src={jacobRolingImage}
+          alt="Jacob Roling"
+          loading="eager"
+          decoding="sync"
+          height={400}
+        />
+      </div>
+    </div>
+    <h2 id="about">About Me</h2>
+    <p>
+      Reliable and hardworking individual with excellent customer service skills. Quick learner, team player, and comfortable in fast-paced environments. Excited to contribute to a positive shopping experience for customers.
+    </p>
+    <h2 id="work-experience">Work Experience</h2>
+    <div>
+      {
+        experience.slice(1).map(({ company, role, remote, description, date }) => (
+          <div>
+            <div class="flex justify-between gap-8">
+              <div class="hgroup">
+                <h3>
+                  {company} {remote ? <span class="badge print:!hidden print:!text-[1em]">Remote</span><span class="hidden print:inline">(remote)</span> : null}
+                </h3>
+                <p>{role}</p>
+              </div>
+              <div class="mt-[1em]">
+                <time datetime={date.started.toISOString()}>{monthFormatter.format(date.started)}</time>
+                <span>-</span>
+                {date.ended ? <time datetime={date.ended.toISOString()}>{monthFormatter.format(date.ended)}</time> : <span>Present</span>}
+              </div>
+            </div>
+            <p>{description ? description : null}</p>
+          </div>
+        ))
+      }
+    </div>
+    <h2 id="education">Education</h2>
+    <div>
+      {
+        education.map(({ institution, qualifiation, highlights, dateCompleted }) => (
+          <div>
+            <div class="flex justify-between gap-8">
+              <div class="hgroup">
+                <h3>{qualifiation}</h3>
+                <p>{institution}</p>
+              </div>
+              <div class="mt-[1em]">
+                {dateCompleted ? <time datetime={dateCompleted.toISOString()}>{dateCompleted.getFullYear()}</time> : null}
+              </div>
+            </div>
+            <p>{highlights}</p>
+          </div>
+        ))
+      }
+    </div>
+  </main>
+</Base>
